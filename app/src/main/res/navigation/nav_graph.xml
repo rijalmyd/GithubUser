@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboard">
+
+    <fragment
+        android:id="@+id/dashboard"
+        android:name="com.rijaldev.githubuser.ui.main.dashboard.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboard_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/favorite"
+        android:name="com.rijaldev.githubuser.ui.main.favorite.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favorite_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.rijaldev.githubuser.ui.detail.DetailFragment"
+        android:label="{username}"
+        tools:layout="@layout/fragment_detail">
+        <action
+            android:id="@+id/action_detailFragment_self"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
+        <argument
+            android:name="username"
+            android:defaultValue="user"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_detailFragment_to_repositoryFragment"
+            app:destination="@id/detailRepoFragment" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="https://rijal.my.id/{username}" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailRepoFragment"
+        android:name="com.rijaldev.githubuser.ui.repository.DetailRepoFragment"
+        android:label="fragment_repository"
+        tools:layout="@layout/fragment_detail_repo" >
+        <argument
+            android:name="username"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="user" />
+        <argument
+            android:name="repository_name"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="repo" />
+    </fragment>
+</navigation>

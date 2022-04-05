@@ -1,0 +1,65 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.GithubUser" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#2196F3</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/white_shape</item>
+        <item name="colorSecondaryVariant">@color/black</item>
+        <item name="colorOnSecondary">@color/grey_ripple</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:editTextColor">@color/black</item>
+    </style>
+
+    <style name="Theme.GithubUser.Background">
+        <item name="android:background">?attr/colorAccent</item>
+    </style>
+
+    <style name="Theme.GithubUser.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlNormal">?attr/colorSecondaryVariant</item>
+        <item name="colorControlHighlight">?attr/colorOnSecondary</item>
+    </style>
+
+    <style name="Theme.GithubUser.PopUpOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="TextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?attr/colorSecondaryVariant</item>
+    </style>
+
+    <style name="TextStyle.Bold">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_18</item>
+    </style>
+
+    <style name="TextStyle.Bold.Cons">
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="TextStyle.MarginStartEnd16">
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+    </style>
+
+    <style name="FontSpringTextAppearance">
+        <item name="android:fontFamily">@font/font_spring</item>
+    </style>
+
+    <style name="FontSpringTextAppearance.24">
+        <item name="android:textSize">@dimen/text_24</item>
+    </style>
+
+    <style name="AllMatchParent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
+</resources>

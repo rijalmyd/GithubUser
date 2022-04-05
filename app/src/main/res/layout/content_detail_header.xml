@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="16dp"
+    android:paddingTop="24dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="16dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_user_profile"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="4dp"
+        android:contentDescription="@string/image_detail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tv_repository"
+        style="@style/TextStyle.Bold"
+        app:layout_constraintBottom_toTopOf="@id/guideline2"
+        app:layout_constraintEnd_toEndOf="@id/text_repository"
+        app:layout_constraintStart_toStartOf="@id/text_repository"
+        tools:text="20" />
+
+    <TextView
+        android:id="@+id/text_repository"
+        style="@style/TextStyle"
+        android:layout_marginStart="24dp"
+        android:text="@string/repository"
+        app:layout_constraintEnd_toStartOf="@+id/text_followers"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_user_profile"
+        app:layout_constraintTop_toBottomOf="@id/guideline2" />
+
+    <TextView
+        android:id="@+id/tv_followers"
+        style="@style/TextStyle.Bold"
+        app:layout_constraintBottom_toTopOf="@id/guideline2"
+        app:layout_constraintEnd_toEndOf="@id/text_followers"
+        app:layout_constraintStart_toStartOf="@id/text_followers"
+        tools:text="200" />
+
+    <TextView
+        android:id="@+id/text_followers"
+        style="@style/TextStyle"
+        android:layout_marginStart="16dp"
+        android:text="@string/followers"
+        app:layout_constraintEnd_toStartOf="@+id/text_following"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/text_repository"
+        app:layout_constraintTop_toBottomOf="@id/guideline2" />
+
+    <TextView
+        android:id="@+id/tv_following"
+        style="@style/TextStyle.Bold"
+        app:layout_constraintBottom_toTopOf="@id/guideline2"
+        app:layout_constraintEnd_toEndOf="@id/text_following"
+        app:layout_constraintStart_toStartOf="@id/text_following"
+        tools:text="146" />
+
+    <TextView
+        android:id="@+id/text_following"
+        style="@style/TextStyle"
+        android:layout_marginStart="16dp"
+        android:text="@string/following"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/text_followers"
+        app:layout_constraintTop_toBottomOf="@id/guideline2" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/TextStyle"
+        android:textStyle="bold"
+        android:drawablePadding="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline3"
+        tools:text="Rijal Muhyidin" />
+
+    <TextView
+        android:id="@+id/tv_type"
+        style="@style/TextStyle"
+        android:textColor="@color/grey"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        tools:text="User" />
+
+    <kr.co.prnd.readmore.ReadMoreTextView
+        android:id="@+id/tv_bio"
+        style="@style/TextStyle"
+        android:lineSpacingExtra="4dp"
+        android:lineSpacingMultiplier="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_type"
+        app:readMoreColor="@color/grey"
+        app:readMoreMaxLine="2"
+        app:readMoreText="@string/more"
+        tools:ignore="TouchTargetSizeCheck"
+        tools:text="Tes" />
+
+    <TextView
+        android:id="@+id/tv_location"
+        style="@style/TextStyle"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="4dp"
+        android:gravity="center_vertical"
+        app:drawableStartCompat="@drawable/ic_baseline_location_on_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_bio"
+        tools:text="Palembang" />
+
+    <TextView
+        android:id="@+id/tv_company"
+        style="@style/TextStyle"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="4dp"
+        android:gravity="center_vertical"
+        app:drawableStartCompat="@drawable/ic_baseline_company_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_location"
+        tools:text="Dicoding" />
+
+    <TextView
+        android:id="@+id/tv_url"
+        style="@style/TextStyle"
+        android:textColor="@color/link"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="4dp"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:drawableStartCompat="@drawable/ic_baseline_insert_link_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_company"
+        tools:text="https://github.com/rijalmyd" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="42dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="104dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

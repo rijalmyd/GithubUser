@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">GithubUser</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="image_detail">Image Profile User</string>
+    <string name="repository">Repository</string>
+    <string name="menu">Menu</string>
+    <string name="text_bagikan_profil">Bagikan profil</string>
+    <string name="more">… selengkapnya</string>
+    <string name="no_users">No User</string>
+    <string name="no_repos">No Repo</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="favorite">Favorite</string>
+    <string name="search">Search</string>
+    <string name="cari">Cari</string>
+    <string name="text_issues">Issues</string>
+    <string name="watchers">Watchers</string>
+    <string name="text_network">Networks</string>
+    <string name="text_description">Description</string>
+    <string name="stars">%s stars</string>
+    <string name="forks">%s forks</string>
+    <string name="text_refresh">Refresh</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
