@@ -4,12 +4,10 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -22,7 +20,6 @@ import com.rijaldev.githubuser.data.source.remote.response.ApiResponse
 import com.rijaldev.githubuser.data.source.remote.response.StatusResponse
 import com.rijaldev.githubuser.databinding.FragmentDetailBinding
 import com.rijaldev.githubuser.databinding.LayoutBottomsheetBinding
-import com.rijaldev.githubuser.ui.detail.follow.FollowFragment
 import com.rijaldev.githubuser.utils.ImageLoader.loadImage
 import com.rijaldev.githubuser.utils.SnackBarExt.showSnackBar
 import com.rijaldev.githubuser.utils.TextLoader.loadData
@@ -66,6 +63,7 @@ class DetailFragment : Fragment() {
     private fun setUpViewPager() {
         binding?.apply {
             val dataUser = DetailFragmentArgs.fromBundle(arguments as Bundle).username
+            if (dataUser != null) viewModel.setUsername(dataUser)
             username = dataUser
             val tabs = tabs
             val viewPager = viewPager
@@ -80,7 +78,6 @@ class DetailFragment : Fragment() {
     private fun setUpView() {
         if (username != null) {
             (activity as AppCompatActivity).supportActionBar?.title = username.toString()
-            viewModel.setUsername(username.toString())
             binding?.header?.root?.setInvisible()
             viewModel.detailUser.observe(viewLifecycleOwner, observer)
         }
@@ -92,7 +89,7 @@ class DetailFragment : Fragment() {
                 binding?.apply {
                     shimmer.setGone()
                     header.root.setVisible()
-                    requireActivity().showSnackBar(root, userDetail.message)
+                    requireActivity().showSnackBar(requireActivity().window.decorView.rootView, userDetail.message)
                 }
             }
             StatusResponse.SUCCESS -> {

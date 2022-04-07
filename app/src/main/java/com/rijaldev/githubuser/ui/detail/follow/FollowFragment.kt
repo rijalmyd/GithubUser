@@ -42,13 +42,19 @@ class FollowFragment : Fragment(), MainAdapter.UserClickCallback {
         if (activity != null) {
             val index: Int? = arguments?.getInt(ARG_SECTION_NUMBER, 1)
             val username = arguments?.getString(EXTRA_USERNAME)
+            viewModel.setUsername(username.toString())
             if (index != null) {
                 when (index) {
-                    1 -> viewModel.getFollowers(username.toString()).observe(viewLifecycleOwner, observer)
-                    2 -> viewModel.getFollowing(username.toString()).observe(viewLifecycleOwner, observer)
+                    1 -> viewModel.getFollowers.observe(viewLifecycleOwner, observer)
+                    2 -> viewModel.getFollowing.observe(viewLifecycleOwner, observer)
                 }
             }
             followerAdapter = MainAdapter(this)
+            binding?.rvFollower?.apply {
+                layoutManager = LinearLayoutManager(requireActivity())
+                setHasFixedSize(true)
+                adapter = followerAdapter
+            }
         }
     }
 
@@ -63,9 +69,6 @@ class FollowFragment : Fragment(), MainAdapter.UserClickCallback {
                 binding?.apply {
                     shimmer.root.setGone()
                     noUsers.root.setGone()
-                    rvFollower.layoutManager = LinearLayoutManager(requireActivity())
-                    rvFollower.setHasFixedSize(true)
-                    rvFollower.adapter = followerAdapter
                 }
                 listUser?.body?.let {
                     if (it.isNotEmpty()) followerAdapter.setUser(it)

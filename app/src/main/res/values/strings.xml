@@ -19,7 +19,4 @@
     <string name="text_description">Description</string>
     <string name="stars">%s stars</string>
     <string name="forks">%s forks</string>
-    <string name="text_refresh">Refresh</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

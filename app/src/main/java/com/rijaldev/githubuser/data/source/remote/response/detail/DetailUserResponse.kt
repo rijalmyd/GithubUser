@@ -1,7 +1,6 @@
 package com.rijaldev.githubuser.data.source.remote.response.detail
 
 import com.google.gson.annotations.SerializedName
-import com.rijaldev.githubuser.data.source.remote.response.user.UserResponse
 
 data class DetailUserResponse(
 

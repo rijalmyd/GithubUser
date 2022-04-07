@@ -1,12 +1,10 @@
 package com.rijaldev.githubuser.ui.detail.repo
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
@@ -16,7 +14,6 @@ import com.rijaldev.githubuser.data.source.remote.response.ApiResponse
 import com.rijaldev.githubuser.data.source.remote.response.StatusResponse
 import com.rijaldev.githubuser.databinding.FragmentRepoBinding
 import com.rijaldev.githubuser.ui.adapter.RepoAdapter
-import com.rijaldev.githubuser.ui.detail.DetailFragmentArgs
 import com.rijaldev.githubuser.ui.detail.DetailFragmentDirections
 import com.rijaldev.githubuser.ui.detail.DetailViewModel
 import com.rijaldev.githubuser.ui.detail.follow.FollowFragment
@@ -43,15 +40,20 @@ class RepoFragment : Fragment(), RepoAdapter.OnRepoCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val name = arguments?.getString(FollowFragment.EXTRA_USERNAME)
+        if (name != null) viewModel.setUsername(name)
         if (activity != null) {
             repoAdapter = RepoAdapter(this)
-            val name = arguments?.getString(FollowFragment.EXTRA_USERNAME)
-            viewModel.getRepository(name.toString()).observe(viewLifecycleOwner, observer)
+            viewModel.getRepository.observe(viewLifecycleOwner, observer)
+            binding?.rvRepo?.apply {
+                layoutManager = LinearLayoutManager(requireActivity())
+                setHasFixedSize(true)
+                adapter = repoAdapter
+            }
         }
     }
 
     private val observer = Observer<ApiResponse<List<RepoEntity>>> { listRepo ->
-        Log.d("REPOKU", ": ${listRepo.status} ${listRepo.body} ${listRepo.message}")
         when (listRepo.status) {
             StatusResponse.EMPTY -> {
                 with(requireActivity()) {
@@ -61,9 +63,6 @@ class RepoFragment : Fragment(), RepoAdapter.OnRepoCallback {
             StatusResponse.SUCCESS -> {
                 binding?.apply {
                     shimmer.root.setGone()
-                    rvRepo.layoutManager = LinearLayoutManager(requireActivity())
-                    rvRepo.setHasFixedSize(true)
-                    rvRepo.adapter = repoAdapter
                 }
                 listRepo?.body?.let {
                     if (it.isNotEmpty()) repoAdapter.setRepo(it) else binding?.noRepo?.root?.setVisible()

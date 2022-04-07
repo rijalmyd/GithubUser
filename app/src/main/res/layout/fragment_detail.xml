@@ -52,7 +52,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent">
 
-                    <include layout="@layout/layout_shimmer_detail" />
+                    <include layout="@layout/shimmer_layout_detail" />
                 </com.facebook.shimmer.ShimmerFrameLayout>
             </RelativeLayout>
 

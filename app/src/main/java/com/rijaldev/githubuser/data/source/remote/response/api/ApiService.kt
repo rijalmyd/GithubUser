@@ -12,41 +12,41 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     @GET("users")
     fun getUsers(): Call<List<UserResponse>>
 
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     @GET("search/users")
     fun searchUser(
         @Query("q") query: String
     ): Call<SearchResponse>
 
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     @GET("users/{username}")
     fun getDetailUser(
         @Path("username") username: String
     ): Call<DetailUserResponse>
 
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     @GET("users/{username}/followers")
     fun getFollowers(
         @Path("username") username: String
     ): Call<List<UserResponse>>
 
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     @GET("users/{username}/following")
     fun getFollowing(
         @Path("username") username: String
     ): Call<List<UserResponse>>
 
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     @GET("users/{username}/repos")
     fun getRepos(
         @Path("username") username: String
     ): Call<List<RepoResponse>>
 
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     @GET("repos/{username}/{repository}")
     fun getDetailRepo(
         @Path("username") username: String,

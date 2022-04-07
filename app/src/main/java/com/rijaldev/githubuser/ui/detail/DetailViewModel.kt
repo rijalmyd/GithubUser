@@ -13,29 +13,26 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(private val userRepository: UserRepository): ViewModel() {
     private val username = MutableLiveData<String>()
-    private val childUname = MutableLiveData<String>()
 
     fun setUsername(username: String) {
         this.username.value = username
-    }
-
-    fun setChildUname(username: String) {
-        childUname.value = username
     }
 
     var detailUser: LiveData<ApiResponse<DetailUserEntity>> = Transformations.switchMap(username) {
         userRepository.getDetailUser(it)
     }
 
-    fun getFollowers(username: String): LiveData<ApiResponse<List<UserEntity>>> =
-        userRepository.getFollowers(username)
+    var getFollowers: LiveData<ApiResponse<List<UserEntity>>> = Transformations.switchMap(username) {
+        userRepository.getFollowers(it)
+    }
 
-    fun getFollowing(username: String): LiveData<ApiResponse<List<UserEntity>>> =
-        userRepository.getFollowing(username)
+    var getFollowing: LiveData<ApiResponse<List<UserEntity>>> = Transformations.switchMap(username) {
+        userRepository.getFollowing(it)
+    }
 
-    fun getRepository(username: String): LiveData<ApiResponse<List<RepoEntity>>> =
-        userRepository.getRepos(username)
-
+    val getRepository: LiveData<ApiResponse<List<RepoEntity>>> = Transformations.switchMap(username) {
+        userRepository.getRepos(it)
+    }
 
     fun insert() = viewModelScope.launch {
         val user = detailUser.value

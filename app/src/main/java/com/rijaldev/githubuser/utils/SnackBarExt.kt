@@ -1,16 +1,10 @@
 package com.rijaldev.githubuser.utils
 
 import android.content.Context
-import android.view.Gravity
 import android.view.View
-import android.view.WindowManager
-import android.widget.FrameLayout
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.rijaldev.githubuser.R
-import com.rijaldev.githubuser.utils.SnackBarExt.showSnackBar
 
 object SnackBarExt {
     fun Context.showSnackBar(view: View?, msg: String?) {

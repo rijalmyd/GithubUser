@@ -30,7 +30,7 @@
 
     <include android:id="@+id/shimmer"
         style="@style/AllMatchParent"
-        layout="@layout/content_shimmer_user"
+        layout="@layout/shimmer_content_user"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
 
     <TextView
