@@ -4,20 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.rijaldev.githubuser.data.source.local.entity.RepoEntity
+import com.rijaldev.githubuser.data.local.entity.RepoEntity
 import com.rijaldev.githubuser.databinding.ItemRepoBinding
 
-class RepoAdapter(private val callback: OnRepoCallback): RecyclerView.Adapter<RepoAdapter.RepoViewHolder>() {
-    private val listRepo = ArrayList<RepoEntity>()
-
-    fun setRepo(repo: List<RepoEntity>) {
-        val diffUtil = RepoDiffUtil(listRepo, repo)
-        val diffResult = DiffUtil.calculateDiff(diffUtil)
-        listRepo.clear()
-        listRepo.addAll(repo)
-        diffResult.dispatchUpdatesTo(this)
-    }
+class RepoAdapter(private val callback: OnRepoCallback
+): ListAdapter<RepoEntity, RepoAdapter.RepoViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
         val binding = ItemRepoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -25,11 +18,9 @@ class RepoAdapter(private val callback: OnRepoCallback): RecyclerView.Adapter<Re
     }
 
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
-        val dataRepo = listRepo[position]
+        val dataRepo = getItem(position)
         holder.bind(dataRepo)
     }
-
-    override fun getItemCount(): Int = listRepo.size
 
     inner class RepoViewHolder(private val binding: ItemRepoBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(repo: RepoEntity) {
@@ -46,5 +37,22 @@ class RepoAdapter(private val callback: OnRepoCallback): RecyclerView.Adapter<Re
 
     interface OnRepoCallback {
         fun onItemClicked(view: View, repoEntity: RepoEntity)
+    }
+
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<RepoEntity>() {
+            override fun areItemsTheSame(oldItem: RepoEntity, newItem: RepoEntity): Boolean =
+                oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: RepoEntity, newItem: RepoEntity): Boolean =
+                when {
+                    oldItem.name != newItem.name -> false
+                    oldItem.description != newItem.description -> false
+                    oldItem.language != newItem.language -> false
+                    oldItem.owner != newItem.owner -> false
+                    oldItem.stargazersCount != newItem.stargazersCount -> false
+                    else -> true
+                }
+        }
     }
 }

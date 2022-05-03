@@ -1,7 +1,7 @@
 package com.rijaldev.githubuser.di
 
-import com.rijaldev.githubuser.BuildConfig
-import com.rijaldev.githubuser.data.source.remote.response.api.ApiService
+import com.rijaldev.githubuser.data.remote.response.api.ApiService
+import com.rijaldev.githubuser.utils.Constant
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,7 +22,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(): Retrofit =
         Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl(Constant.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 }

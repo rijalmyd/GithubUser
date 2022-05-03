@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/dashboard">
-
     <fragment
         android:id="@+id/dashboard"
         android:name="com.rijaldev.githubuser.ui.main.dashboard.DashboardFragment"
@@ -41,13 +40,10 @@
         <action
             android:id="@+id/action_detailFragment_to_repositoryFragment"
             app:destination="@id/detailRepoFragment" />
-        <deepLink
-            android:id="@+id/deepLink"
-            app:uri="https://rijal.my.id/{username}" />
     </fragment>
     <fragment
         android:id="@+id/detailRepoFragment"
-        android:name="com.rijaldev.githubuser.ui.repository.DetailRepoFragment"
+        android:name="com.rijaldev.githubuser.ui.detailrepo.DetailRepoFragment"
         android:label="fragment_repository"
         tools:layout="@layout/fragment_detail_repo" >
         <argument

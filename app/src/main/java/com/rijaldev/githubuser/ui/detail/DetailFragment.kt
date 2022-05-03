@@ -15,9 +15,8 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayoutMediator
 import com.rijaldev.githubuser.R
-import com.rijaldev.githubuser.data.source.local.entity.DetailUserEntity
-import com.rijaldev.githubuser.data.source.remote.response.ApiResponse
-import com.rijaldev.githubuser.data.source.remote.response.StatusResponse
+import com.rijaldev.githubuser.data.local.entity.DetailUserEntity
+import com.rijaldev.githubuser.data.remote.response.Result
 import com.rijaldev.githubuser.databinding.FragmentDetailBinding
 import com.rijaldev.githubuser.databinding.LayoutBottomsheetBinding
 import com.rijaldev.githubuser.utils.ImageLoader.loadImage
@@ -79,29 +78,22 @@ class DetailFragment : Fragment() {
         if (username != null) {
             (activity as AppCompatActivity).supportActionBar?.title = username.toString()
             binding?.header?.root?.setInvisible()
-            viewModel.detailUser.observe(viewLifecycleOwner, observer)
+            viewModel.detailUser .observe(viewLifecycleOwner, observer)
         }
     }
 
-    private val observer = Observer<ApiResponse<DetailUserEntity>> { userDetail ->
-        when (userDetail.status) {
-            StatusResponse.ERROR -> {
-                binding?.apply {
-                    shimmer.setGone()
-                    header.root.setVisible()
-                    requireActivity().showSnackBar(requireActivity().window.decorView.rootView, userDetail.message)
-                }
-            }
-            StatusResponse.SUCCESS -> {
+    private val observer = Observer<Result<DetailUserEntity>> { result ->
+        when (result) {
+            is Result.Success -> {
                 binding?.apply {
                     shimmer.setGone()
                     header.root.setVisible()
                 }
-                if (userDetail.body != null) {
-                    dataUser = userDetail.body
-                    populateUser(userDetail.body)
+                dataUser = result.data
+                dataUser?.let {
+                    populateUser(it)
                     lifecycleScope.launch(Dispatchers.IO) {
-                        val count = viewModel.isFavorite(userDetail.body.userId)
+                        val count = viewModel.isFavorite(it.userId)
                         withContext(Dispatchers.Main) {
                             stateFavoriteUser = count > 0
                             setFavoriteState(stateFavoriteUser)
@@ -109,12 +101,13 @@ class DetailFragment : Fragment() {
                     }
                 }
             }
-            StatusResponse.EMPTY -> {
+            is Result.Error -> {
                 binding?.apply {
                     shimmer.setGone()
                     header.root.setVisible()
-                    requireActivity().showSnackBar(requireActivity().window.decorView.rootView,
-                        userDetail.message)
+                    requireActivity().showSnackBar(
+                        requireActivity().window.decorView.rootView,
+                        result.message)
                 }
             }
         }
@@ -182,13 +175,15 @@ class DetailFragment : Fragment() {
 
     private fun onFavButtonClick() {
         stateFavoriteUser = if (stateFavoriteUser) {
-            viewModel.delete()
-            requireActivity().showSnackBar(requireActivity().window.decorView.rootView, "List Favorite diperbarui ")
+            dataUser?.userId?.let { viewModel.removeFromFavorite(it) }
+            requireActivity().showSnackBar(requireActivity().window.decorView.rootView,
+                "List Favorite diperbarui ")
             setFavoriteState(false)
             false
         } else {
-            viewModel.insert()
-            requireActivity().showSnackBar(requireActivity().window.decorView.rootView, "Menambahkan $username ke favorite")
+            dataUser?.let { viewModel.addToFavorite(it) }
+            requireActivity().showSnackBar(requireActivity().window.decorView.rootView,
+                "Menambahkan $username ke favorite")
             setFavoriteState(true)
             true
         }
@@ -217,13 +212,13 @@ class DetailFragment : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
 
-    companion object {
-        @StringRes
-        val TAB_TITLES = arrayOf(R.string.repository, R.string.followers, R.string.following)
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        @StringRes
+        val TAB_TITLES = arrayOf(R.string.repository, R.string.followers, R.string.following)
     }
 }

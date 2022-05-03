@@ -9,9 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.rijaldev.githubuser.data.source.local.entity.RepoEntity
-import com.rijaldev.githubuser.data.source.remote.response.ApiResponse
-import com.rijaldev.githubuser.data.source.remote.response.StatusResponse
+import com.rijaldev.githubuser.data.local.entity.RepoEntity
+import com.rijaldev.githubuser.data.remote.response.Result
 import com.rijaldev.githubuser.databinding.FragmentRepoBinding
 import com.rijaldev.githubuser.ui.adapter.RepoAdapter
 import com.rijaldev.githubuser.ui.detail.DetailFragmentDirections
@@ -27,7 +26,7 @@ class RepoFragment : Fragment(), RepoAdapter.OnRepoCallback {
 
     private var _binding: FragmentRepoBinding? = null
     private val binding get() = _binding
-    private val viewModel: DetailViewModel by viewModels()
+    private val viewModel: DetailViewModel by viewModels ()
     private lateinit var repoAdapter: RepoAdapter
 
     override fun onCreateView(
@@ -53,26 +52,23 @@ class RepoFragment : Fragment(), RepoAdapter.OnRepoCallback {
         }
     }
 
-    private val observer = Observer<ApiResponse<List<RepoEntity>>> { listRepo ->
-        when (listRepo.status) {
-            StatusResponse.EMPTY -> {
-                with(requireActivity()) {
-                    showSnackBar(this.window.decorView.rootView, listRepo.message)
-                }
-            }
-            StatusResponse.SUCCESS -> {
+    private val observer = Observer<Result<List<RepoEntity>>> { result ->
+        when (result) {
+            is Result.Success -> {
                 binding?.apply {
                     shimmer.root.setGone()
+                    rvRepo.setVisible()
                 }
-                listRepo?.body?.let {
-                    if (it.isNotEmpty()) repoAdapter.setRepo(it) else binding?.noRepo?.root?.setVisible()
+                result.data?.let {
+                    if (it.isNotEmpty()) repoAdapter.submitList(it) else
+                        binding?.noRepo?.root?.setVisible()
                 }
             }
-            StatusResponse.ERROR -> {
+            is Result.Error -> {
                 binding?.apply {
                     shimmer.root.setGone()
                     with(requireActivity()) {
-                        showSnackBar(this.window.decorView.rootView, listRepo.message)
+                        showSnackBar(this.window.decorView.rootView, result.message)
                     }
                 }
             }

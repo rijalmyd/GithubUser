@@ -4,25 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.rijaldev.githubuser.data.source.local.entity.DetailUserEntity
+import com.rijaldev.githubuser.data.local.entity.DetailUserEntity
 import com.rijaldev.githubuser.databinding.ItemsUserBinding
 import com.rijaldev.githubuser.utils.ImageLoader.loadImage
 
 class FavoriteAdapter(private val callback: OnUserFavCallback)
-    : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
-
-    private val listUser = ArrayList<DetailUserEntity>()
-
-    fun setUser(user: List<DetailUserEntity>) {
-        val diffUtil = FavoriteDiffUtil(listUser, user)
-        val diffResult = DiffUtil.calculateDiff(diffUtil)
-        listUser.clear()
-        listUser.addAll(user)
-        diffResult.dispatchUpdatesTo(this)
-    }
+    : ListAdapter<DetailUserEntity, FavoriteAdapter.FavoriteViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int
     ): FavoriteViewHolder {
@@ -32,11 +23,9 @@ class FavoriteAdapter(private val callback: OnUserFavCallback)
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
-        val user = listUser[position]
+        val user = getItem(position)
         holder.bind(user)
     }
-
-    override fun getItemCount(): Int = listUser.size
 
     inner class FavoriteViewHolder(private val binding: ItemsUserBinding
     ): RecyclerView.ViewHolder(binding.root) {
@@ -53,5 +42,26 @@ class FavoriteAdapter(private val callback: OnUserFavCallback)
 
     interface OnUserFavCallback {
         fun onItemClick(view: View, user: DetailUserEntity)
+    }
+
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DetailUserEntity>() {
+            override fun areItemsTheSame(
+                oldItem: DetailUserEntity,
+                newItem: DetailUserEntity
+            ): Boolean =
+                oldItem.id == newItem.id
+
+            override fun areContentsTheSame(
+                oldItem: DetailUserEntity,
+                newItem: DetailUserEntity
+            ): Boolean =
+                when {
+                    oldItem.id != newItem.id -> false
+                    oldItem.avatarUrl != newItem.avatarUrl -> false
+                    oldItem.login != newItem.login -> false
+                    else -> true
+                }
+        }
     }
 }

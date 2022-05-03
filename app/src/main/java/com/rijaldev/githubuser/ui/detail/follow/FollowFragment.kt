@@ -9,11 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.rijaldev.githubuser.data.source.local.entity.UserEntity
-import com.rijaldev.githubuser.data.source.remote.response.ApiResponse
-import com.rijaldev.githubuser.data.source.remote.response.StatusResponse
+import com.rijaldev.githubuser.data.local.entity.UserEntity
+import com.rijaldev.githubuser.data.remote.response.Result
 import com.rijaldev.githubuser.databinding.FragmentFollowBinding
-import com.rijaldev.githubuser.ui.adapter.MainAdapter
+import com.rijaldev.githubuser.ui.adapter.UserAdapter
 import com.rijaldev.githubuser.ui.detail.DetailFragmentDirections
 import com.rijaldev.githubuser.ui.detail.DetailViewModel
 import com.rijaldev.githubuser.utils.SnackBarExt.showSnackBar
@@ -22,12 +21,12 @@ import com.rijaldev.githubuser.utils.ViewVisibilityUtil.setVisible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FollowFragment : Fragment(), MainAdapter.UserClickCallback {
+class FollowFragment : Fragment(), UserAdapter.UserClickCallback {
 
     private var _binding: FragmentFollowBinding? = null
     private val binding get() = _binding
     private val viewModel: DetailViewModel by viewModels()
-    private lateinit var followerAdapter: MainAdapter
+    private lateinit var userAdapter: UserAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,38 +48,33 @@ class FollowFragment : Fragment(), MainAdapter.UserClickCallback {
                     2 -> viewModel.getFollowing.observe(viewLifecycleOwner, observer)
                 }
             }
-            followerAdapter = MainAdapter(this)
+            userAdapter = UserAdapter(this)
             binding?.rvFollower?.apply {
                 layoutManager = LinearLayoutManager(requireActivity())
                 setHasFixedSize(true)
-                adapter = followerAdapter
+                adapter = userAdapter
             }
         }
     }
 
-    private val observer = Observer<ApiResponse<List<UserEntity>>> { listUser ->
-        when (listUser.status) {
-            StatusResponse.EMPTY -> {
-                with(requireActivity()) {
-                    showSnackBar(this.window.decorView.rootView, listUser.message)
-                }
-            }
-            StatusResponse.SUCCESS -> {
+    private val observer = Observer<Result<List<UserEntity>>> { result ->
+        when (result) {
+            is Result.Success -> {
                 binding?.apply {
                     shimmer.root.setGone()
                     noUsers.root.setGone()
                 }
-                listUser?.body?.let {
-                    if (it.isNotEmpty()) followerAdapter.setUser(it)
-                    else binding?.noUsers?.root?.setVisible()
+                result.data?.let {
+                    if (it.isNotEmpty()) userAdapter.submitList(it) else
+                        binding?.noUsers?.root?.setVisible()
                 }
             }
-            StatusResponse.ERROR -> {
+            is Result.Error -> {
                 binding?.apply {
                     shimmer.root.setGone()
                 }
                 with(requireActivity()) {
-                    showSnackBar(this.window.decorView.rootView, listUser.message)
+                    showSnackBar(this.window.decorView.rootView, result.message)
                 }
             }
         }

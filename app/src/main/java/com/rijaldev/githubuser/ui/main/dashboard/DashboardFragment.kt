@@ -14,11 +14,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rijaldev.githubuser.R
-import com.rijaldev.githubuser.data.source.local.entity.UserEntity
-import com.rijaldev.githubuser.data.source.remote.response.ApiResponse
-import com.rijaldev.githubuser.data.source.remote.response.StatusResponse
+import com.rijaldev.githubuser.data.local.entity.UserEntity
+import com.rijaldev.githubuser.data.remote.response.Result
 import com.rijaldev.githubuser.databinding.FragmentDashboardBinding
-import com.rijaldev.githubuser.ui.adapter.MainAdapter
+import com.rijaldev.githubuser.ui.adapter.UserAdapter
 import com.rijaldev.githubuser.ui.main.MainViewModel
 import com.rijaldev.githubuser.utils.SnackBarExt.showSnackBar
 import com.rijaldev.githubuser.utils.ViewVisibilityUtil.setGone
@@ -27,12 +26,12 @@ import com.rijaldev.githubuser.utils.ViewVisibilityUtil.setVisible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DashboardFragment: Fragment(), MainAdapter.UserClickCallback {
+class DashboardFragment: Fragment(), UserAdapter.UserClickCallback {
 
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding
     private val viewModel: MainViewModel by viewModels()
-    private lateinit var mainAdapter: MainAdapter
+    private lateinit var userAdapter: UserAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,40 +49,35 @@ class DashboardFragment: Fragment(), MainAdapter.UserClickCallback {
     }
 
     private fun setUpView() {
-        mainAdapter = MainAdapter(this)
+        userAdapter = UserAdapter(this)
         binding?.apply {
             shimmer.root.setVisible()
             rvMain.setInvisible()
             rvMain.layoutManager = LinearLayoutManager(requireActivity())
             rvMain.setHasFixedSize(true)
-            rvMain.adapter = mainAdapter
+            rvMain.adapter = userAdapter
         }
-        viewModel.dataUsers.observe(viewLifecycleOwner, observer)
+        viewModel.dataUser.observe(viewLifecycleOwner, observer)
     }
 
-    private val observer = Observer<ApiResponse<List<UserEntity>>> { listUser ->
-        when(listUser.status) {
-            StatusResponse.EMPTY -> {
-                binding?.apply {
-                    requireActivity().showSnackBar(requireActivity().window.decorView.rootView,
-                        listUser.message)
-                }
-            }
-            StatusResponse.SUCCESS -> {
+    private val observer = Observer<Result<List<UserEntity>>> { result ->
+        when(result) {
+            is Result.Success -> {
                 binding?.apply {
                     shimmer.root.setGone()
                     rvMain.setVisible()
                 }
-                if (listUser.body != null) {
-                    mainAdapter.setUser(listUser.body)
+                result.data?.let {
+                    userAdapter.submitList(it)
                 }
             }
-            StatusResponse.ERROR -> {
+            is Result.Error -> {
                 binding?.apply {
                     shimmer.root.setGone()
                     rvMain.setVisible()
-                    requireActivity().showSnackBar(requireActivity().window.decorView.rootView,
-                    listUser.message)
+                    requireActivity().showSnackBar(
+                        requireActivity().window.decorView.rootView,
+                        result.message)
                 }
             }
         }
@@ -114,7 +108,7 @@ class DashboardFragment: Fragment(), MainAdapter.UserClickCallback {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText != null) {
+                if (newText != null && newText.isNotEmpty()) {
                     viewModel.searchUser(newText).observe(viewLifecycleOwner, observer)
                 }
                 return true

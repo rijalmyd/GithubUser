@@ -12,11 +12,12 @@
         android:layout_height="wrap_content"
         android:theme="@style/Theme.GithubUser.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorOnPrimary"
+            app:menu="@menu/fav_menu"
             app:title="List Favorite"
             app:titleTextColor="?attr/colorSecondaryVariant"
             app:popupTheme="@style/Theme.GithubUser.PopUpOverlay"/>

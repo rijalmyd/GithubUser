@@ -1,60 +1,46 @@
 package com.rijaldev.githubuser.ui.detail
 
 import androidx.lifecycle.*
-import com.rijaldev.githubuser.data.source.UserRepository
-import com.rijaldev.githubuser.data.source.local.entity.DetailUserEntity
-import com.rijaldev.githubuser.data.source.local.entity.RepoEntity
-import com.rijaldev.githubuser.data.source.local.entity.UserEntity
-import com.rijaldev.githubuser.data.source.remote.response.ApiResponse
+import com.rijaldev.githubuser.data.UserRepository
+import com.rijaldev.githubuser.data.local.entity.DetailUserEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(private val userRepository: UserRepository): ViewModel() {
+class DetailViewModel @Inject constructor(
+    private val userRepository: UserRepository
+): ViewModel() {
+
     private val username = MutableLiveData<String>()
 
     fun setUsername(username: String) {
         this.username.value = username
     }
 
-    var detailUser: LiveData<ApiResponse<DetailUserEntity>> = Transformations.switchMap(username) {
+    val detailUser = Transformations.switchMap(username) {
         userRepository.getDetailUser(it)
     }
 
-    var getFollowers: LiveData<ApiResponse<List<UserEntity>>> = Transformations.switchMap(username) {
+    val getFollowers = Transformations.switchMap(username) {
         userRepository.getFollowers(it)
     }
 
-    var getFollowing: LiveData<ApiResponse<List<UserEntity>>> = Transformations.switchMap(username) {
+    val getFollowing = Transformations.switchMap(username) {
         userRepository.getFollowing(it)
     }
 
-    val getRepository: LiveData<ApiResponse<List<RepoEntity>>> = Transformations.switchMap(username) {
+    val getRepository = Transformations.switchMap(username) {
         userRepository.getRepos(it)
     }
 
-    fun insert() = viewModelScope.launch {
-        val user = detailUser.value
-        if (user != null) {
-            val resource = user.body
-            if (resource != null) {
-                userRepository.insert(resource)
-            }
-        }
+    fun addToFavorite(user: DetailUserEntity) = viewModelScope.launch {
+        userRepository.addToFavorite(user)
     }
 
-    fun delete() = viewModelScope.launch {
-        val user = detailUser.value
-        if (user != null) {
-            val resource = user.body?.userId
-            if (resource != null) {
-                userRepository.delete(resource)
-            }
-        }
+    fun removeFromFavorite(id: Int) = viewModelScope.launch {
+        userRepository.removeFromFavorite(id)
     }
 
-    fun isFavorite(id: Int) : Int {
-        return userRepository.isFavorite(id)
-    }
+    fun isFavorite(id: Int): Int = userRepository.isFavorite(id)
 }

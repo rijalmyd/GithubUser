@@ -2,7 +2,7 @@ package com.rijaldev.githubuser.di
 
 import android.content.Context
 import androidx.room.Room
-import com.rijaldev.githubuser.data.source.local.room.UserDatabase
+import com.rijaldev.githubuser.data.local.room.UserDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
