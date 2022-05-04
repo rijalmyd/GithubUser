@@ -2,4 +2,5 @@
 <resources>
     <color name="bg_horizontal_line">#FF262626</color>
     <color name="bg_splash_screen">#FF000000</color>
+    <color name="bg_tabs">#FFFFFF</color>
 </resources>

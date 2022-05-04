@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class RepoEntity(
+    val updatedAt: String?,
     val stargazersCount: Int?,
     val visibility: String?,
     val name: String?,

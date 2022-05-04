@@ -129,6 +129,7 @@ class UserRepository @Inject constructor(
                 val response = remoteDataSource.getRepos(username)
                 val repoList = response.map {
                     RepoEntity(
+                        it.updatedAt,
                         it.stargazersCount,
                         it.visibility,
                         it.name,
@@ -137,7 +138,7 @@ class UserRepository @Inject constructor(
                         it.owner.login,
                         it.id
                     )
-                }
+                }.sortedByDescending { it.updatedAt }
                 emit(Result.Success(repoList))
             } catch (e: Exception) {
                 emit(Result.Error(e.message.toString()))

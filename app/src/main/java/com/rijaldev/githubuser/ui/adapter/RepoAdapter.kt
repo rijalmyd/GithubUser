@@ -1,13 +1,13 @@
 package com.rijaldev.githubuser.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.rijaldev.githubuser.data.local.entity.RepoEntity
 import com.rijaldev.githubuser.databinding.ItemRepoBinding
+import com.rijaldev.githubuser.utils.CountFormatUtil.toCountFormat
 
 class RepoAdapter(private val callback: OnRepoCallback
 ): ListAdapter<RepoEntity, RepoAdapter.RepoViewHolder>(DIFF_CALLBACK) {
@@ -29,14 +29,14 @@ class RepoAdapter(private val callback: OnRepoCallback
                 tvVisibility.text = repo.visibility?.replaceFirstChar { it.uppercase() }
                 tvDescription.text = repo.description
                 tvLanguage.text = repo.language
-                tvStars.text = repo.stargazersCount.toString()
-                itemView.setOnClickListener { callback.onItemClicked(it, repo) }
+                tvStars.text = repo.stargazersCount?.toCountFormat()
+                itemView.setOnClickListener { callback.onItemClicked(repo) }
             }
         }
     }
 
     interface OnRepoCallback {
-        fun onItemClicked(view: View, repoEntity: RepoEntity)
+        fun onItemClicked(repoEntity: RepoEntity)
     }
 
     companion object {

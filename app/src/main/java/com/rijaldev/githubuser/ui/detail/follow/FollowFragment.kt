@@ -7,14 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rijaldev.githubuser.data.local.entity.UserEntity
 import com.rijaldev.githubuser.data.remote.response.Result
 import com.rijaldev.githubuser.databinding.FragmentFollowBinding
 import com.rijaldev.githubuser.ui.adapter.UserAdapter
+import com.rijaldev.githubuser.ui.detail.DetailFragment
 import com.rijaldev.githubuser.ui.detail.DetailFragmentDirections
 import com.rijaldev.githubuser.ui.detail.DetailViewModel
+import com.rijaldev.githubuser.utils.NavControllerHelper.safeNavigate
 import com.rijaldev.githubuser.utils.SnackBarExt.showSnackBar
 import com.rijaldev.githubuser.utils.ViewVisibilityUtil.setGone
 import com.rijaldev.githubuser.utils.ViewVisibilityUtil.setVisible
@@ -60,19 +62,14 @@ class FollowFragment : Fragment(), UserAdapter.UserClickCallback {
     private val observer = Observer<Result<List<UserEntity>>> { result ->
         when (result) {
             is Result.Success -> {
-                binding?.apply {
-                    shimmer.root.setGone()
-                    noUsers.root.setGone()
-                }
+                showContent()
                 result.data?.let {
                     if (it.isNotEmpty()) userAdapter.submitList(it) else
                         binding?.noUsers?.root?.setVisible()
                 }
             }
             is Result.Error -> {
-                binding?.apply {
-                    shimmer.root.setGone()
-                }
+                showContent()
                 with(requireActivity()) {
                     showSnackBar(this.window.decorView.rootView, result.message)
                 }
@@ -80,15 +77,20 @@ class FollowFragment : Fragment(), UserAdapter.UserClickCallback {
         }
     }
 
+    private fun showContent() = binding?.apply {
+        shimmer.root.setGone()
+        noUsers.root.setGone()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    override fun onClick(view: View, user: UserEntity) {
+    override fun onClick(user: UserEntity) {
         val toDetail = DetailFragmentDirections.actionDetailFragmentSelf()
         toDetail.username = user.login
-        view.findNavController().navigate(toDetail)
+        safeNavigate(toDetail, DetailFragment::class.java.name)
     }
 
     companion object {

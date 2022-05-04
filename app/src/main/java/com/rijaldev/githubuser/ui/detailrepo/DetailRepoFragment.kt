@@ -15,6 +15,7 @@ import com.rijaldev.githubuser.R
 import com.rijaldev.githubuser.data.local.entity.DetailRepoEntity
 import com.rijaldev.githubuser.data.remote.response.Result
 import com.rijaldev.githubuser.databinding.FragmentDetailRepoBinding
+import com.rijaldev.githubuser.utils.CountFormatUtil.toCountFormat
 import com.rijaldev.githubuser.utils.SnackBarExt.showSnackBar
 import com.rijaldev.githubuser.utils.TextLoader.loadData
 import com.rijaldev.githubuser.utils.ViewVisibilityUtil.setGone
@@ -60,24 +61,23 @@ class DetailRepoFragment : Fragment() {
     private val observer = Observer<Result<DetailRepoEntity>> { result ->
         when (result) {
             is Result.Success -> {
-                binding?.apply {
-                    shimmer.setGone()
-                    contentRepo.root.setVisible()
-                }
+                showContent()
                 result.data?.let {
                     populateUser(it)
                 }
             }
             is Result.Error -> {
-                binding?.apply {
-                    shimmer.setGone()
-                    contentRepo.root.setVisible()
-                    requireActivity().showSnackBar(
-                        requireActivity().window.decorView.rootView,
-                        result.message)
-                }
+                showContent()
+                requireActivity().showSnackBar(
+                    requireActivity().window.decorView.rootView,
+                    result.message)
             }
         }
+    }
+
+    private fun showContent() = binding?.apply {
+        shimmer.setGone()
+        contentRepo.root.setVisible()
     }
 
     private fun populateUser(detailRepoEntity: DetailRepoEntity) {
@@ -85,12 +85,12 @@ class DetailRepoFragment : Fragment() {
             with(detailRepoEntity) {
                 tvRepoName.loadData(name)
                 repoUrl.loadData(fullName)
-                tvStars.loadData(resources.getString(R.string.stars, stargazersCount?.toString()))
-                tvForks.loadData(resources.getString(R.string.forks, forksCount?.toString()))
+                tvStars.loadData(resources.getString(R.string.stars, stargazersCount?.toCountFormat()))
+                tvForks.loadData(resources.getString(R.string.forks, forksCount?.toCountFormat()))
                 tvLanguage.loadData(language)
-                tvIssuesCount.loadData(openIssuesCount?.toString())
-                tvWatchersCount.loadData(watchersCount?.toString())
-                tvNetworkCount.loadData(networkCount?.toString())
+                tvIssuesCount.loadData(openIssuesCount?.toCountFormat())
+                tvWatchersCount.loadData(watchersCount?.toCountFormat())
+                tvNetworkCount.loadData(networkCount?.toCountFormat())
                 tvDescription.text = description ?: "No description provided."
                 repoUrl.setOnClickListener {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(htmlUrl))

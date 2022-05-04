@@ -19,6 +19,7 @@ import com.rijaldev.githubuser.data.local.entity.DetailUserEntity
 import com.rijaldev.githubuser.data.remote.response.Result
 import com.rijaldev.githubuser.databinding.FragmentDetailBinding
 import com.rijaldev.githubuser.databinding.LayoutBottomsheetBinding
+import com.rijaldev.githubuser.utils.CountFormatUtil.toCountFormat
 import com.rijaldev.githubuser.utils.ImageLoader.loadImage
 import com.rijaldev.githubuser.utils.SnackBarExt.showSnackBar
 import com.rijaldev.githubuser.utils.TextLoader.loadData
@@ -85,10 +86,7 @@ class DetailFragment : Fragment() {
     private val observer = Observer<Result<DetailUserEntity>> { result ->
         when (result) {
             is Result.Success -> {
-                binding?.apply {
-                    shimmer.setGone()
-                    header.root.setVisible()
-                }
+                showContent()
                 dataUser = result.data
                 dataUser?.let {
                     populateUser(it)
@@ -102,15 +100,17 @@ class DetailFragment : Fragment() {
                 }
             }
             is Result.Error -> {
-                binding?.apply {
-                    shimmer.setGone()
-                    header.root.setVisible()
-                    requireActivity().showSnackBar(
-                        requireActivity().window.decorView.rootView,
-                        result.message)
-                }
+                showContent()
+                requireActivity().showSnackBar(
+                    requireActivity().window.decorView.rootView,
+                    result.message)
             }
         }
+    }
+
+    private fun showContent() = binding?.apply {
+        shimmer.setGone()
+        header.root.setVisible()
     }
 
     private fun populateUser(detailEntity: DetailUserEntity) {
@@ -118,8 +118,8 @@ class DetailFragment : Fragment() {
             with(detailEntity) {
                 ivUserProfile.loadImage(requireActivity(), avatarUrl, CircleCrop())
                 tvRepository.loadData(publicRepos?.toString())
-                tvFollowers.loadData(followers?.toString())
-                tvFollowing.loadData(following?.toString())
+                tvFollowers.loadData(followers?.toCountFormat())
+                tvFollowing.loadData(following?.toCountFormat())
                 tvName.loadData(name)
                 tvType.loadData(type)
                 tvLocation.loadData(location)

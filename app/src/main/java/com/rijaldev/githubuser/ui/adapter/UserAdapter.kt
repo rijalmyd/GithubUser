@@ -31,13 +31,13 @@ class UserAdapter(private val callback: UserClickCallback)
                 tvName.text = user.login
                 tvUsername.text = user.type
                 ivUser.loadImage(itemView.context, user.avatarUrl, CenterCrop(), RoundedCorners(16))
-                itemView.setOnClickListener { callback.onClick(it, user) }
+                itemView.setOnClickListener { callback.onClick(user) }
             }
         }
     }
 
     interface UserClickCallback {
-        fun onClick(view: View, user: UserEntity)
+        fun onClick(user: UserEntity)
     }
 
     companion object {

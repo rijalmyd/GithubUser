@@ -10,13 +10,14 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rijaldev.githubuser.R
 import com.rijaldev.githubuser.data.local.entity.DetailUserEntity
 import com.rijaldev.githubuser.databinding.FragmentFavoriteBinding
 import com.rijaldev.githubuser.ui.adapter.FavoriteAdapter
 import com.rijaldev.githubuser.ui.main.MainViewModel
+import com.rijaldev.githubuser.utils.NavControllerHelper.safeNavigate
 import com.rijaldev.githubuser.utils.ViewVisibilityUtil.setGone
 import com.rijaldev.githubuser.utils.ViewVisibilityUtil.setVisible
 import dagger.hilt.android.AndroidEntryPoint
@@ -86,9 +87,9 @@ class FavoriteFragment : Fragment(), FavoriteAdapter.OnUserFavCallback, Toolbar.
             }
             else -> false
         }
-    override fun onItemClick(view: View, user: DetailUserEntity) {
+    override fun onItemClick(user: DetailUserEntity) {
         val toDetail = FavoriteFragmentDirections.actionFavoriteToDetailFragment()
         toDetail.username = user.login
-        view.findNavController().navigate(toDetail)
+        safeNavigate(toDetail, javaClass.name)
     }
 }

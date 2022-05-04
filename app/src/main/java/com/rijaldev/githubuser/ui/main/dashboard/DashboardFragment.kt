@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rijaldev.githubuser.R
 import com.rijaldev.githubuser.data.local.entity.UserEntity
@@ -19,6 +19,7 @@ import com.rijaldev.githubuser.data.remote.response.Result
 import com.rijaldev.githubuser.databinding.FragmentDashboardBinding
 import com.rijaldev.githubuser.ui.adapter.UserAdapter
 import com.rijaldev.githubuser.ui.main.MainViewModel
+import com.rijaldev.githubuser.utils.NavControllerHelper.safeNavigate
 import com.rijaldev.githubuser.utils.SnackBarExt.showSnackBar
 import com.rijaldev.githubuser.utils.ViewVisibilityUtil.setGone
 import com.rijaldev.githubuser.utils.ViewVisibilityUtil.setInvisible
@@ -63,24 +64,23 @@ class DashboardFragment: Fragment(), UserAdapter.UserClickCallback {
     private val observer = Observer<Result<List<UserEntity>>> { result ->
         when(result) {
             is Result.Success -> {
-                binding?.apply {
-                    shimmer.root.setGone()
-                    rvMain.setVisible()
-                }
+                showContent()
                 result.data?.let {
                     userAdapter.submitList(it)
                 }
             }
             is Result.Error -> {
-                binding?.apply {
-                    shimmer.root.setGone()
-                    rvMain.setVisible()
-                    requireActivity().showSnackBar(
-                        requireActivity().window.decorView.rootView,
-                        result.message)
-                }
+                showContent()
+                requireActivity().showSnackBar(
+                    requireActivity().window.decorView.rootView,
+                    result.message)
             }
         }
+    }
+
+    private fun showContent() = binding?.apply {
+        shimmer.root.setGone()
+        rvMain.setVisible()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -121,9 +121,9 @@ class DashboardFragment: Fragment(), UserAdapter.UserClickCallback {
         _binding = null
     }
 
-    override fun onClick(view: View, user: UserEntity) {
+    override fun onClick(user: UserEntity) {
         val toDetail = DashboardFragmentDirections.actionDashboardToDetailFragment()
         toDetail.username = user.login
-        view.findNavController().navigate(toDetail)
+        safeNavigate(toDetail, javaClass.name)
     }
 }

@@ -35,13 +35,13 @@ class FavoriteAdapter(private val callback: OnUserFavCallback)
                 tvUsername.text = user.type
                 ivUser.loadImage(itemView.context, user.avatarUrl,
                     CenterCrop(), RoundedCorners(16))
-                itemView.setOnClickListener { callback.onItemClick(it, user) }
+                itemView.setOnClickListener { callback.onItemClick(user) }
             }
         }
     }
 
     interface OnUserFavCallback {
-        fun onItemClick(view: View, user: DetailUserEntity)
+        fun onItemClick(user: DetailUserEntity)
     }
 
     companion object {
