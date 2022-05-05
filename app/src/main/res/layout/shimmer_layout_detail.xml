@@ -20,10 +20,9 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/tv_repository"
         style="@style/TextStyle"
         android:layout_width="64dp"
-        android:background="@color/shimmer"
+        android:background="@drawable/bg_shimmer"
         app:layout_constraintBottom_toTopOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="@id/text_repository"
         app:layout_constraintStart_toStartOf="@id/text_repository"/>
@@ -32,7 +31,7 @@
         android:id="@+id/text_repository"
         style="@style/TextStyle"
         android:layout_width="64dp"
-        android:background="@color/shimmer"
+        android:background="@drawable/bg_shimmer"
         android:layout_marginTop="4dp"
         android:layout_marginStart="24dp"
         app:layout_constraintEnd_toStartOf="@+id/text_followers"
@@ -41,10 +40,9 @@
         app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
     <TextView
-        android:id="@+id/tv_followers"
         style="@style/TextStyle"
         android:layout_width="64dp"
-        android:background="@color/shimmer"
+        android:background="@drawable/bg_shimmer"
         app:layout_constraintBottom_toTopOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="@id/text_followers"
         app:layout_constraintStart_toStartOf="@id/text_followers"/>
@@ -53,7 +51,7 @@
         android:id="@+id/text_followers"
         style="@style/TextStyle"
         android:layout_width="64dp"
-        android:background="@color/shimmer"
+        android:background="@drawable/bg_shimmer"
         android:layout_marginTop="4dp"
         android:layout_marginStart="16dp"
         app:layout_constraintEnd_toStartOf="@+id/text_following"
@@ -62,9 +60,8 @@
         app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
     <TextView
-        android:id="@+id/tv_following"
         style="@style/TextStyle"
-        android:background="@color/shimmer"
+        android:background="@drawable/bg_shimmer"
         android:layout_width="64dp"
         app:layout_constraintBottom_toTopOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="@id/text_following"
@@ -76,7 +73,7 @@
         android:layout_width="64dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:background="@color/shimmer"
+        android:background="@drawable/bg_shimmer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/text_followers"
@@ -88,7 +85,7 @@
         android:layout_width="100dp"
         android:layout_marginTop="16dp"
         android:textStyle="bold"
-        android:background="@color/shimmer"
+        android:background="@drawable/bg_shimmer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_user_profile"/>
 
@@ -97,7 +94,7 @@
         style="@style/TextStyle"
         android:layout_width="32dp"
         android:layout_marginTop="4dp"
-        android:background="@color/shimmer"
+        android:background="@drawable/bg_shimmer"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
         app:layout_constraintStart_toStartOf="parent"/>
 

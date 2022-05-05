@@ -1,7 +1,6 @@
 package com.rijaldev.githubuser.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -11,6 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.rijaldev.githubuser.data.local.entity.DetailUserEntity
 import com.rijaldev.githubuser.databinding.ItemsUserBinding
 import com.rijaldev.githubuser.utils.ImageLoader.loadImage
+import com.rijaldev.githubuser.utils.TextLoader.loadData
 
 class FavoriteAdapter(private val callback: OnUserFavCallback)
     : ListAdapter<DetailUserEntity, FavoriteAdapter.FavoriteViewHolder>(DIFF_CALLBACK) {
@@ -31,17 +31,17 @@ class FavoriteAdapter(private val callback: OnUserFavCallback)
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(user: DetailUserEntity) {
             binding.apply {
-                tvName.text = user.login
-                tvUsername.text = user.type
+                tvName.loadData(user.login)
+                tvType.loadData(user.type)
                 ivUser.loadImage(itemView.context, user.avatarUrl,
                     CenterCrop(), RoundedCorners(16))
-                itemView.setOnClickListener { callback.onItemClick(user) }
+                itemView.setOnClickListener { callback.onItemClicked(user) }
             }
         }
     }
 
     interface OnUserFavCallback {
-        fun onItemClick(user: DetailUserEntity)
+        fun onItemClicked(user: DetailUserEntity)
     }
 
     companion object {

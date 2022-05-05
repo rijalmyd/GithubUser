@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rijaldev.githubuser.R
 import com.rijaldev.githubuser.data.local.entity.UserEntity
@@ -51,9 +50,8 @@ class DashboardFragment: Fragment(), UserAdapter.UserClickCallback {
 
     private fun setUpView() {
         userAdapter = UserAdapter(this)
+        hideContent()
         binding?.apply {
-            shimmer.root.setVisible()
-            rvMain.setInvisible()
             rvMain.layoutManager = LinearLayoutManager(requireActivity())
             rvMain.setHasFixedSize(true)
             rvMain.adapter = userAdapter
@@ -83,6 +81,11 @@ class DashboardFragment: Fragment(), UserAdapter.UserClickCallback {
         rvMain.setVisible()
     }
 
+    private fun hideContent() = binding?.apply {
+        shimmer.root.setVisible()
+        rvMain.setInvisible()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.dashboard_menu, menu)
@@ -97,10 +100,7 @@ class DashboardFragment: Fragment(), UserAdapter.UserClickCallback {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
-                    binding?.apply {
-                        shimmer.root.setVisible()
-                        rvMain.setInvisible()
-                    }
+                    hideContent()
                     viewModel.searchUser(query).observe(viewLifecycleOwner, observer)
                 }
                 searchView.clearFocus()
@@ -121,7 +121,7 @@ class DashboardFragment: Fragment(), UserAdapter.UserClickCallback {
         _binding = null
     }
 
-    override fun onClick(user: UserEntity) {
+    override fun onItemClicked(user: UserEntity) {
         val toDetail = DashboardFragmentDirections.actionDashboardToDetailFragment()
         toDetail.username = user.login
         safeNavigate(toDetail, javaClass.name)

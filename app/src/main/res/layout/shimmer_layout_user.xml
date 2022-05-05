@@ -16,25 +16,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/shimmer"
+        android:background="@drawable/bg_shimmer"
         tools:ignore="ContentDescription"/>
 
     <TextView
         android:id="@+id/tv_name"
         style="@style/TextStyle.MarginStartEnd16"
         android:layout_width="0dp"
-        android:background="@color/shimmer"
+        android:background="@drawable/bg_shimmer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_user"
         app:layout_constraintTop_toTopOf="@id/iv_user" />
 
     <TextView
-        android:id="@+id/tv_username"
         style="@style/TextStyle.MarginStartEnd16"
         android:layout_width="48dp"
         android:layout_marginTop="4dp"
         android:textSize="@dimen/text_14"
-        android:background="@color/shimmer"
+        android:background="@drawable/bg_shimmer"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
         app:layout_constraintStart_toEndOf="@id/iv_user"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

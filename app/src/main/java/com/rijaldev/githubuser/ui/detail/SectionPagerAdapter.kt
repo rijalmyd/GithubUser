@@ -10,7 +10,7 @@ import com.rijaldev.githubuser.ui.detail.repo.RepoFragment
 
 class SectionPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle, private val username: String?): FragmentStateAdapter(fm, lifecycle) {
 
-    override fun getItemCount(): Int  = DetailFragment.TAB_TITLES.size
+    override fun getItemCount(): Int  = 3
 
     override fun createFragment(position: Int): Fragment {
         var fragment: Fragment? = null

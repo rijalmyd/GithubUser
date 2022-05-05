@@ -20,4 +20,5 @@
     <string name="stars">%s stars</string>
     <string name="forks">%s forks</string>
     <string name="theme_mode">Theme Mode</string>
+    <string name="text_unknown"><i>Unknown</i></string>
 </resources>

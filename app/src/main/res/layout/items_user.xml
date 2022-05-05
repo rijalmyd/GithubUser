@@ -32,7 +32,7 @@
         tools:text="Rijal Muhyidin"/>
 
     <TextView
-        android:id="@+id/tv_username"
+        android:id="@+id/tv_type"
         style="@style/TextStyle.MarginStartEnd16"
         android:layout_marginTop="4dp"
         android:textSize="@dimen/text_14"

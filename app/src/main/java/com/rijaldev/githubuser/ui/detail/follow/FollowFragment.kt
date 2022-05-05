@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rijaldev.githubuser.data.local.entity.UserEntity
 import com.rijaldev.githubuser.data.remote.response.Result
@@ -62,14 +61,14 @@ class FollowFragment : Fragment(), UserAdapter.UserClickCallback {
     private val observer = Observer<Result<List<UserEntity>>> { result ->
         when (result) {
             is Result.Success -> {
-                showContent()
+                hideLoading()
                 result.data?.let {
                     if (it.isNotEmpty()) userAdapter.submitList(it) else
                         binding?.noUsers?.root?.setVisible()
                 }
             }
             is Result.Error -> {
-                showContent()
+                hideLoading()
                 with(requireActivity()) {
                     showSnackBar(this.window.decorView.rootView, result.message)
                 }
@@ -77,7 +76,7 @@ class FollowFragment : Fragment(), UserAdapter.UserClickCallback {
         }
     }
 
-    private fun showContent() = binding?.apply {
+    private fun hideLoading() = binding?.apply {
         shimmer.root.setGone()
         noUsers.root.setGone()
     }
@@ -87,7 +86,7 @@ class FollowFragment : Fragment(), UserAdapter.UserClickCallback {
         _binding = null
     }
 
-    override fun onClick(user: UserEntity) {
+    override fun onItemClicked(user: UserEntity) {
         val toDetail = DetailFragmentDirections.actionDetailFragmentSelf()
         toDetail.username = user.login
         safeNavigate(toDetail, DetailFragment::class.java.name)

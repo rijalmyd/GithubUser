@@ -12,5 +12,4 @@
     <color name="snackbar">#FF323232</color>
     <color name="bg_horizontal_line">#FFDBDBDB</color>
     <color name="bg_splash_screen">#FFFFFFFF</color>
-    <color name="bg_tabs">#000000</color>
 </resources>

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -69,9 +68,7 @@ class DetailFragment : Fragment() {
             val viewPager = viewPager
             val sectionPagerAdapter = SectionPagerAdapter(childFragmentManager, lifecycle, dataUser)
             viewPager.adapter = sectionPagerAdapter
-            TabLayoutMediator(tabs, viewPager) { tab, position ->
-                tab.text = resources.getString(TAB_TITLES[position])
-            }.attach()
+            TabLayoutMediator(tabs, viewPager) { _, _ -> }.attach()
         }
     }
 
@@ -215,10 +212,5 @@ class DetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        @StringRes
-        val TAB_TITLES = arrayOf(R.string.repository, R.string.followers, R.string.following)
     }
 }

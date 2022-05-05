@@ -31,9 +31,9 @@ class MainActivity : AppCompatActivity() {
     private fun initThemeMode() {
         viewModel.isDarkModeActive().observe(this) { isDarkModeActive ->
             if (isDarkModeActive) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
     }

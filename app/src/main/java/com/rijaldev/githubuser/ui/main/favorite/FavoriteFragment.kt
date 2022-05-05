@@ -10,7 +10,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rijaldev.githubuser.R
 import com.rijaldev.githubuser.data.local.entity.DetailUserEntity
@@ -51,13 +50,13 @@ class FavoriteFragment : Fragment(), FavoriteAdapter.OnUserFavCallback, Toolbar.
             toolbar.setOnMenuItemClickListener(this@FavoriteFragment)
             viewModel.isDarkModeActive().observe(viewLifecycleOwner) { isDarkModeActive ->
                 if (isDarkModeActive) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    toolbar.menu.getItem(0).setIcon(R.drawable.ic_baseline_dark_mode_24)
-                    this@FavoriteFragment.isDarkMode = false
-                } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     toolbar.menu.getItem(0).setIcon(R.drawable.ic_baseline_light_mode_24)
                     this@FavoriteFragment.isDarkMode = true
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    toolbar.menu.getItem(0).setIcon(R.drawable.ic_baseline_dark_mode_24)
+                    this@FavoriteFragment.isDarkMode = false
                 }
             }
         }
@@ -82,12 +81,12 @@ class FavoriteFragment : Fragment(), FavoriteAdapter.OnUserFavCallback, Toolbar.
     override fun onMenuItemClick(item: MenuItem?): Boolean =
         when (item?.itemId) {
             R.id.btn_theme_mode -> {
-                viewModel.setThemeMode(isDarkMode)
+                viewModel.setThemeMode(!isDarkMode)
                 true
             }
             else -> false
         }
-    override fun onItemClick(user: DetailUserEntity) {
+    override fun onItemClicked(user: DetailUserEntity) {
         val toDetail = FavoriteFragmentDirections.actionFavoriteToDetailFragment()
         toDetail.username = user.login
         safeNavigate(toDetail, javaClass.name)

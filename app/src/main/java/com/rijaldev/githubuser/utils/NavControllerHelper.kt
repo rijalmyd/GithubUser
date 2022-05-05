@@ -1,7 +1,6 @@
 package com.rijaldev.githubuser.utils
 
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.DialogFragmentNavigator
 import androidx.navigation.fragment.FragmentNavigator

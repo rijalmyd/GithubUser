@@ -15,6 +15,7 @@
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1595" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/bg_gradient.xml" value="0.11" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/bg_search.xml" value="0.112" />
+        <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/bg_shimmer.xml" value="0.125" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/bg_text.xml" value="0.1" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/bottom_nav_color.xml" value="0.112" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/bottom_nav_icon_color_selector.xml" value="0.11" />
@@ -34,9 +35,12 @@
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/ic_baseline_star_border_24.xml" value="0.1595" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/ic_baseline_verified_24.xml" value="0.1545" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/ic_drawing.xml" value="0.156" />
+        <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/ic_drawing_1.xml" value="0.1565" />
+        <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/ic_drawing_2.xml" value="0.1565" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/ic_fav.xml" value="0.13" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/ic_fav_fill.xml" value="0.18" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/ic_fav_selector.xml" value="0.112" />
+        <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/ic_following.xml" value="0.119" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/ic_git.xml" value="0.156" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/ic_github.xml" value="0.1445" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/drawable/ic_home.xml" value="0.1595" />
@@ -71,9 +75,10 @@
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/fragment_detail.xml" value="0.2" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/fragment_detail_repo.xml" value="0.2" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/fragment_favorite.xml" value="0.2" />
+        <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/fragment_follow.xml" value="0.1" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/fragment_follower.xml" value="0.18641390205371247" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/fragment_following.xml" value="0.2" />
-        <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/fragment_repo.xml" value="0.19692307692307692" />
+        <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/fragment_repo.xml" value="0.13756613756613756" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/fragment_repository.xml" value="0.12135416666666667" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/ic_fav.xml" value="0.10677083333333333" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/ic_github.xml" value="0.1" />
@@ -88,9 +93,12 @@
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/layout_shimmer_repo.xml" value="0.2" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/layout_shimmer_user.xml" value="0.2" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/shimmer_content_detail_repo.xml" value="0.2" />
+        <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/shimmer_content_repo.xml" value="0.1078125" />
+        <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/shimmer_content_user.xml" value="0.33" />
+        <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/shimmer_layout_detail.xml" value="0.21" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/shimmer_layout_detail_repo.xml" value="0.2" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/shimmer_layout_repo.xml" value="0.2" />
-        <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/shimmer_layout_user.xml" value="0.1" />
+        <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/layout/shimmer_layout_user.xml" value="0.5" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/menu/bottom_menu.xml" value="0.2" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/menu/dashboard_menu.xml" value="0.1" />
         <entry key="..\:/Users/LENOVO/OneDrive/Desktop/Sub2/GithubUser/app/src/main/res/menu/detail_menu.xml" value="0.25" />
