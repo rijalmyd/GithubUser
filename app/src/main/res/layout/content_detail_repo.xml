@@ -12,12 +12,12 @@
         android:textSize="@dimen/text_20"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Movie-Catalogue-Dicoding" />
+        tools:text="Movie-Catalogue" />
 
     <TextView
         android:id="@+id/repo_url"
         style="@style/TextStyle"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:textColor="@color/link"
         app:layout_constraintStart_toStartOf="@id/tv_repo_name"
         app:layout_constraintTop_toBottomOf="@id/tv_repo_name"
@@ -26,7 +26,7 @@
     <TextView
         android:id="@+id/tv_stars"
         style="@style/TextStyle"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:drawablePadding="8dp"
         android:gravity="center_vertical"
         app:drawableStartCompat="@drawable/ic_baseline_star_border_24"
@@ -40,7 +40,8 @@
         android:layout_marginStart="16dp"
         android:drawablePadding="8dp"
         android:gravity="center_vertical"
-        app:drawableStartCompat="@drawable/ic_baseline_fork_right_24"
+        app:drawableStartCompat="@drawable/ic_forks"
+        app:drawableTint="?attr/colorControlNormal"
         app:layout_constraintBottom_toBottomOf="@id/tv_stars"
         app:layout_constraintStart_toEndOf="@id/tv_stars"
         app:layout_constraintTop_toTopOf="@id/tv_stars"
@@ -68,6 +69,33 @@
         app:layout_constraintStart_toStartOf="@id/tv_stars"
         app:layout_constraintTop_toBottomOf="@id/tv_stars" />
 
+
+    <TextView
+        android:id="@+id/text_last_updated"
+        style="@style/TextStyle"
+        android:layout_marginTop="24dp"
+        android:drawablePadding="16dp"
+        android:gravity="center_vertical"
+        android:text="@string/text_last_updated"
+        app:drawableStartCompat="@drawable/ic_time"
+        app:layout_constraintEnd_toStartOf="@+id/tv_last_updated"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line1" />
+
+    <TextView
+        android:id="@+id/tv_last_updated"
+        style="@style/TextStyle"
+        android:layout_width="0dp"
+        android:layout_marginStart="16dp"
+        android:textAlignment="viewEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/text_last_updated"
+        app:layout_constraintTop_toTopOf="@id/text_last_updated"
+        app:layout_constraintBottom_toBottomOf="@id/text_last_updated"
+        tools:text="3 days ago" />
+
     <TextView
         android:id="@+id/text_issue"
         style="@style/TextStyle"
@@ -79,7 +107,7 @@
         app:layout_constraintEnd_toStartOf="@+id/tv_issues_count"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line1" />
+        app:layout_constraintTop_toBottomOf="@id/text_last_updated" />
 
     <TextView
         android:id="@+id/tv_issues_count"
@@ -119,7 +147,6 @@
         app:layout_constraintTop_toTopOf="@id/text_watchers"
         app:layout_constraintBottom_toBottomOf="@id/text_watchers"
         tools:text="6" />
-
 
     <TextView
         android:id="@+id/text_network"

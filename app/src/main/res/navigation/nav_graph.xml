@@ -12,6 +12,9 @@
             android:id="@+id/action_dashboard_to_detailFragment"
             app:destination="@id/detailFragment"
             app:enterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_dashboard_to_onSearchFragment"
+            app:destination="@id/onSearchFragment" />
     </fragment>
     <fragment
         android:id="@+id/favorite"
@@ -55,5 +58,14 @@
             app:argType="string"
             app:nullable="true"
             android:defaultValue="repo" />
+    </fragment>
+    <fragment
+        android:id="@+id/onSearchFragment"
+        android:name="com.rijaldev.githubuser.ui.main.onsearch.OnSearchFragment"
+        android:label="fragment_on_search"
+        tools:layout="@layout/fragment_on_search" >
+        <action
+            android:id="@+id/action_onSearchFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
 </navigation>

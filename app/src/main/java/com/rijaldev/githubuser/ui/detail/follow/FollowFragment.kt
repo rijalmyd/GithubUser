@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.rijaldev.githubuser.data.local.entity.UserEntity
 import com.rijaldev.githubuser.data.remote.response.Result
 import com.rijaldev.githubuser.databinding.FragmentFollowBinding
-import com.rijaldev.githubuser.ui.adapter.UserAdapter
+import com.rijaldev.githubuser.ui.adapters.UserAdapter
 import com.rijaldev.githubuser.ui.detail.DetailFragment
 import com.rijaldev.githubuser.ui.detail.DetailFragmentDirections
 import com.rijaldev.githubuser.ui.detail.DetailViewModel

@@ -162,7 +162,8 @@ class UserRepository @Inject constructor(
                     subscribersCount,
                     id,
                     watchersCount,
-                    forksCount
+                    forksCount,
+                    updatedAt
                 )
                 emit(Result.Success(detailEntity))
             }

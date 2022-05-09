@@ -1,4 +1,4 @@
-package com.rijaldev.githubuser.ui.adapter
+package com.rijaldev.githubuser.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +9,8 @@ import com.rijaldev.githubuser.R
 import com.rijaldev.githubuser.data.local.entity.RepoEntity
 import com.rijaldev.githubuser.databinding.ItemRepoBinding
 import com.rijaldev.githubuser.utils.CountFormatUtil.toCountFormat
+import com.rijaldev.githubuser.utils.DateFormatUtil.getTimeAgo
+import com.rijaldev.githubuser.utils.LanguageColorUtil.setLeftDrawableColor
 import com.rijaldev.githubuser.utils.TextLoader.loadData
 
 class RepoAdapter(private val callback: OnRepoCallback
@@ -27,11 +29,13 @@ class RepoAdapter(private val callback: OnRepoCallback
     inner class RepoViewHolder(private val binding: ItemRepoBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(repo: RepoEntity) {
             binding.apply {
+                tvLanguage.setLeftDrawableColor(itemView.context, repo.language)
                 tvTitle.loadData(repo.name)
                 tvVisibility.loadData(repo.visibility?.replaceFirstChar { it.uppercase() })
                 tvDescription.loadData(repo.description ?: "-")
                 tvLanguage.loadData(repo.language ?: itemView.context.getString(R.string.text_unknown))
                 tvStars.loadData(repo.stargazersCount?.toCountFormat())
+                tvUpdatedAt.loadData(repo.updatedAt?.getTimeAgo())
                 itemView.setOnClickListener { callback.onItemClicked(repo) }
             }
         }

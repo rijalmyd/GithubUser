@@ -16,6 +16,8 @@ import com.rijaldev.githubuser.data.local.entity.DetailRepoEntity
 import com.rijaldev.githubuser.data.remote.response.Result
 import com.rijaldev.githubuser.databinding.FragmentDetailRepoBinding
 import com.rijaldev.githubuser.utils.CountFormatUtil.toCountFormat
+import com.rijaldev.githubuser.utils.DateFormatUtil.getTimeAgo
+import com.rijaldev.githubuser.utils.LanguageColorUtil.setLeftDrawableColor
 import com.rijaldev.githubuser.utils.SnackBarExt.showSnackBar
 import com.rijaldev.githubuser.utils.TextLoader.loadData
 import com.rijaldev.githubuser.utils.ViewVisibilityUtil.setGone
@@ -85,6 +87,7 @@ class DetailRepoFragment : Fragment() {
             with(detailRepoEntity) {
                 tvRepoName.loadData(name)
                 repoUrl.loadData(fullName)
+                tvLastUpdated.loadData(updatedAt.getTimeAgo().replace("Updated ", ""))
                 tvStars.loadData(resources.getString(R.string.stars, stargazersCount?.toCountFormat()))
                 tvForks.loadData(resources.getString(R.string.forks, forksCount?.toCountFormat()))
                 tvLanguage.loadData(language)
@@ -92,6 +95,7 @@ class DetailRepoFragment : Fragment() {
                 tvWatchersCount.loadData(watchersCount?.toCountFormat())
                 tvNetworkCount.loadData(networkCount?.toCountFormat())
                 tvDescription.text = description ?: "No description provided."
+                tvLanguage.setLeftDrawableColor(requireActivity(), language)
                 repoUrl.setOnClickListener {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(htmlUrl))
                     startActivity(intent)

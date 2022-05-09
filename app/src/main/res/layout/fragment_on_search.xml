@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/Theme.GithubUser.Background"
-    tools:context=".ui.main.dashboard.DashboardFragment">
+    tools:context=".ui.main.onsearch.OnSearchFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -17,11 +17,17 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorOnPrimary"
-            app:title="@string/app_name"
-            app:titleTextColor="?attr/colorSecondaryVariant"
-            app:titleTextAppearance="@style/FontSpringTextAppearance.24"
-            app:popupTheme="@style/Theme.GithubUser.PopUpOverlay"/>
+            app:contentInsetStart="0dp"
+            app:contentInsetEnd="0dp"
+            app:popupTheme="@style/Theme.GithubUser.PopUpOverlay">
 
+            <com.rijaldev.githubuser.ui.customviews.MySearchView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_marginStart="-16dp"
+                android:layout_height="?attr/actionBarSize"
+                app:iconifiedByDefault="false"/>
+        </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -35,5 +41,4 @@
         style="@style/AllMatchParent"
         layout="@layout/shimmer_content_user"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

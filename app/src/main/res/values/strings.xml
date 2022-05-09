@@ -12,7 +12,6 @@
     <string name="dashboard">Dashboard</string>
     <string name="favorite">Favorite</string>
     <string name="search">Search</string>
-    <string name="cari">Cari</string>
     <string name="text_issues">Issues</string>
     <string name="watchers">Watchers</string>
     <string name="text_network">Networks</string>
@@ -21,4 +20,23 @@
     <string name="forks">%s forks</string>
     <string name="theme_mode">Theme Mode</string>
     <string name="text_unknown"><i>Unknown</i></string>
+
+    <string name="text_tv_titlee"><font size="20">%1$s</font> <font size="12">%2$2</font></string>
+    <string name="text_tv_title"><annotation fontSize="30">%1$s</annotation> %2$s</string>
+    <string name="text_title_repo">
+        <![CDATA[
+         <big size="35">%1$s</big> <small>%2$s</small>
+        ]]>
+    </string>
+    <string name="jh">
+        <![CDATA[
+         %s Multiple style inside android textView: bold text: <b>bold
+         text</b>, italicText text: <i>italic text</i>, small font:
+         <small>small text</small>,
+         font color: <font color="blue"<Text Color</font<, font
+         color with bold text: <font color="green"><b>Bold with font
+         color</b></font>
+        ]]>
+    </string>
+    <string name="text_last_updated">Last updated</string>
 </resources>

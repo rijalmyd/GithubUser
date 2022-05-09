@@ -29,7 +29,7 @@
         style="@style/TextStyle"
         android:layout_width="80dp"
         android:background="@drawable/bg_shimmer"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:gravity="center_vertical"
         app:layout_constraintStart_toStartOf="@id/repo_url"
         app:layout_constraintTop_toBottomOf="@id/repo_url"/>
@@ -65,6 +65,28 @@
         app:layout_constraintTop_toBottomOf="@id/tv_stars" />
 
     <TextView
+        android:id="@+id/text_update"
+        style="@style/TextStyle"
+        android:layout_width="200dp"
+        android:background="@drawable/bg_shimmer"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_updated_at"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line1" />
+
+    <TextView
+        android:id="@+id/tv_updated_at"
+        style="@style/TextStyle"
+        android:layout_width="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_shimmer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line1"
+        app:layout_constraintBottom_toBottomOf="@id/text_update"/>
+
+    <TextView
         android:id="@+id/text_issue"
         style="@style/TextStyle"
         android:layout_width="200dp"
@@ -73,17 +95,16 @@
         app:layout_constraintEnd_toStartOf="@+id/tv_issues_count"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line1" />
+        app:layout_constraintTop_toBottomOf="@id/text_update" />
 
     <TextView
         android:id="@+id/tv_issues_count"
         style="@style/TextStyle"
+        android:background="@drawable/bg_shimmer"
         android:layout_width="50dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/bg_shimmer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line1"
+        app:layout_constraintTop_toTopOf="@id/text_issue"
         app:layout_constraintBottom_toBottomOf="@id/text_issue"/>
 
     <TextView
@@ -106,7 +127,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/text_watchers"
         app:layout_constraintBottom_toBottomOf="@id/text_watchers"/>
-
 
     <TextView
         android:id="@+id/text_network"
@@ -138,7 +158,6 @@
         app:layout_constraintEnd_toEndOf="@id/tv_network_count"
         app:layout_constraintStart_toStartOf="@id/text_network"
         app:layout_constraintTop_toBottomOf="@id/text_network" />
-
 
     <TextView
         android:id="@+id/text_description"

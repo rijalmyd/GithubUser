@@ -12,41 +12,41 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-    @Headers("Authorization: token ${Constant.TOKEN}")
+    @Headers("Authorization: ${Constant.TOKEN}")
     @GET("users")
     suspend fun getUsers(): List<UserResponse>
 
-    @Headers("Authorization: token ${Constant.TOKEN}")
+    @Headers("Authorization: ${Constant.TOKEN}")
     @GET("search/users")
     suspend fun searchUser(
         @Query("q") query: String
     ): SearchResponse
 
-    @Headers("Authorization: token ${Constant.TOKEN}")
+    @Headers("Authorization: ${Constant.TOKEN}")
     @GET("users/{username}")
     suspend fun getDetailUser(
         @Path("username") username: String
     ): DetailUserResponse
 
-    @Headers("Authorization: token ${Constant.TOKEN}")
+    @Headers("Authorization: ${Constant.TOKEN}")
     @GET("users/{username}/followers")
     suspend fun getFollowers(
         @Path("username") username: String
     ): List<UserResponse>
 
-    @Headers("Authorization: token ${Constant.TOKEN}")
+    @Headers("Authorization: ${Constant.TOKEN}")
     @GET("users/{username}/following")
     suspend fun getFollowing(
         @Path("username") username: String
     ): List<UserResponse>
 
-    @Headers("Authorization: token ${Constant.TOKEN}")
+    @Headers("Authorization: ${Constant.TOKEN}")
     @GET("users/{username}/repos")
     suspend fun getRepos(
         @Path("username") username: String
     ): List<RepoResponse>
 
-    @Headers("Authorization: token ${Constant.TOKEN}")
+    @Headers("Authorization: ${Constant.TOKEN}")
     @GET("repos/{username}/{repository}")
     suspend fun getDetailRepo(
         @Path("username") username: String,

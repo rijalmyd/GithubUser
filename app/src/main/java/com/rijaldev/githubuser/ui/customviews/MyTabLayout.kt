@@ -13,6 +13,7 @@ class MyTabLayout: TabLayout {
     private var firstTab: Drawable? = null
     private var secondTab: Drawable? = null
     private var thirdTab: Drawable? = null
+    private var indicator: Drawable? = null
 
     constructor(context: Context): super(context) {
         init()
@@ -30,13 +31,17 @@ class MyTabLayout: TabLayout {
         firstTab = ContextCompat.getDrawable(context, R.drawable.ic_git)
         secondTab = ContextCompat.getDrawable(context, R.drawable.ic_follower)
         thirdTab = ContextCompat.getDrawable(context, R.drawable.ic_following)
+        indicator = ContextCompat.getDrawable(context, R.drawable.ic_indicator_tab)
     }
+
+    private fun Drawable?.setIconAt(position: Int) = getTabAt(position)?.apply { icon = this@setIconAt }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
-        getTabAt(0)?.apply { icon = firstTab }
-        getTabAt(1)?.apply { icon = secondTab }
-        getTabAt(2)?.apply { icon = thirdTab }
+        setSelectedTabIndicator(indicator)
+        tabRippleColor = null
+        firstTab.setIconAt(0)
+        secondTab.setIconAt(1)
+        thirdTab.setIconAt(2)
     }
 }

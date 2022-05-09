@@ -1,8 +1,6 @@
 package com.rijaldev.githubuser.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.rijaldev.githubuser.data.UserRepository
 import com.rijaldev.githubuser.data.local.entity.DetailUserEntity
 import com.rijaldev.githubuser.data.local.entity.UserEntity
@@ -14,10 +12,17 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val userRepository: UserRepository): ViewModel() {
 
+    private val query = MutableLiveData<String>()
+
+    fun setQuery(query: String) {
+        this.query.value = query
+    }
+
     val dataUser = userRepository.getUsers()
 
-    fun searchUser(query: String): LiveData<Result<List<UserEntity>>> =
-        userRepository.searchUser(query)
+    val searchUser: LiveData<Result<List<UserEntity>>> = Transformations.switchMap(query) {
+        userRepository.searchUser(it)
+    }
 
     fun getFavUsers(): LiveData<List<DetailUserEntity>> = userRepository.getFavoriteUsers()
 

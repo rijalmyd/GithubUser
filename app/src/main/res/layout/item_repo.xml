@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="@id/tv_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/tv_title"
-        tools:text="public"/>
+        tools:text="Public"/>
 
     <TextView
         android:id="@+id/tv_description"
@@ -53,21 +53,38 @@
         android:id="@+id/tv_language"
         style="@style/TextStyle"
         android:drawablePadding="8dp"
+        android:textSize="12sp"
         android:gravity="center_vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:drawableStartCompat="@drawable/ic_baseline_circle_24"
+        tools:drawableStart="@drawable/ic_baseline_circle_24"
         tools:text="Kotlin"/>
 
     <TextView
         android:id="@+id/tv_stars"
         style="@style/TextStyle"
+        android:textSize="12sp"
         android:gravity="center_vertical"
         android:drawablePadding="8dp"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintStart_toEndOf="@id/tv_language"
         app:layout_constraintTop_toTopOf="@id/tv_language"
         app:layout_constraintBottom_toBottomOf="parent"
         app:drawableStartCompat="@drawable/ic_baseline_star_border_24"
         tools:text="6"/>
+
+    <TextView
+        android:id="@+id/tv_updated_at"
+        style="@style/TextStyle"
+        android:textSize="12sp"
+        android:layout_marginStart="16dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_stars"
+        app:layout_constraintStart_toEndOf="@id/tv_stars"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="Updated 3 days ago"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

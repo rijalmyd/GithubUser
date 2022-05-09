@@ -19,65 +19,89 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/tv_repository"
-        style="@style/TextStyle.Bold"
-        app:layout_constraintBottom_toTopOf="@id/guideline2"
-        app:layout_constraintEnd_toEndOf="@id/text_repository"
-        app:layout_constraintStart_toStartOf="@id/text_repository"
-        tools:text="20" />
-
-    <TextView
-        android:id="@+id/text_repository"
-        style="@style/TextStyle"
+    <LinearLayout
+        android:id="@+id/repository_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="@string/repository"
-        app:layout_constraintEnd_toStartOf="@+id/text_followers"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/followers_container"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iv_user_profile"
-        app:layout_constraintTop_toBottomOf="@id/guideline2" />
+        app:layout_constraintTop_toTopOf="@id/guideline2">
 
-    <TextView
-        android:id="@+id/tv_followers"
-        style="@style/TextStyle.Bold"
-        app:layout_constraintBottom_toTopOf="@id/guideline2"
-        app:layout_constraintEnd_toEndOf="@id/text_followers"
-        app:layout_constraintStart_toStartOf="@id/text_followers"
-        tools:text="200" />
+        <TextView
+            android:id="@+id/tv_repository"
+            style="@style/TextStyle.Bold"
+            tools:text="20" />
 
-    <TextView
-        android:id="@+id/text_followers"
-        style="@style/TextStyle"
+        <TextView
+            android:id="@+id/text_repository"
+            style="@style/TextStyle"
+            android:text="@string/repository" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/followers_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="@string/followers"
-        app:layout_constraintEnd_toStartOf="@+id/text_following"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/following_container"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/text_repository"
-        app:layout_constraintTop_toBottomOf="@id/guideline2" />
+        app:layout_constraintStart_toEndOf="@+id/repository_container"
+        app:layout_constraintTop_toTopOf="@id/guideline2">
 
-    <TextView
-        android:id="@+id/tv_following"
-        style="@style/TextStyle.Bold"
-        app:layout_constraintBottom_toTopOf="@id/guideline2"
-        app:layout_constraintEnd_toEndOf="@id/text_following"
-        app:layout_constraintStart_toStartOf="@id/text_following"
-        tools:text="146" />
+        <TextView
+            android:id="@+id/tv_followers"
+            style="@style/TextStyle.Bold"
+            tools:text="200" />
 
-    <TextView
-        android:id="@+id/text_following"
-        style="@style/TextStyle"
+        <TextView
+            android:id="@+id/text_followers"
+            style="@style/TextStyle"
+            android:text="@string/followers" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/following_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="@string/following"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/text_followers"
-        app:layout_constraintTop_toBottomOf="@id/guideline2" />
+        app:layout_constraintStart_toEndOf="@+id/followers_container"
+        app:layout_constraintTop_toTopOf="@id/guideline2">
+
+        <TextView
+            android:id="@+id/tv_following"
+            style="@style/TextStyle.Bold"
+            tools:text="146" />
+
+        <TextView
+            android:id="@+id/text_following"
+            style="@style/TextStyle"
+            android:text="@string/following" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_name"
         style="@style/TextStyle"
-        android:textStyle="bold"
         android:drawablePadding="4dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline3"
         tools:text="Rijal Muhyidin" />
@@ -128,12 +152,12 @@
     <TextView
         android:id="@+id/tv_url"
         style="@style/TextStyle"
-        android:textColor="@color/link"
         android:layout_marginTop="4dp"
         android:drawablePadding="4dp"
+        android:ellipsize="end"
         android:gravity="center_vertical"
         android:maxLines="1"
-        android:ellipsize="end"
+        android:textColor="@color/link"
         app:drawableStartCompat="@drawable/ic_baseline_insert_link_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_company"
@@ -152,4 +176,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="104dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

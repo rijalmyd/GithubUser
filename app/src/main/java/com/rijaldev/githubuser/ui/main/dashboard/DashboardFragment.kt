@@ -1,13 +1,8 @@
 package com.rijaldev.githubuser.ui.main.dashboard
 
-import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -16,7 +11,7 @@ import com.rijaldev.githubuser.R
 import com.rijaldev.githubuser.data.local.entity.UserEntity
 import com.rijaldev.githubuser.data.remote.response.Result
 import com.rijaldev.githubuser.databinding.FragmentDashboardBinding
-import com.rijaldev.githubuser.ui.adapter.UserAdapter
+import com.rijaldev.githubuser.ui.adapters.UserAdapter
 import com.rijaldev.githubuser.ui.main.MainViewModel
 import com.rijaldev.githubuser.utils.NavControllerHelper.safeNavigate
 import com.rijaldev.githubuser.utils.SnackBarExt.showSnackBar
@@ -89,31 +84,20 @@ class DashboardFragment: Fragment(), UserAdapter.UserClickCallback {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.dashboard_menu, menu)
+    }
 
-        val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchView = menu.findItem(R.id.search).actionView as SearchView
-        val editText = searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
-        editText.setHintTextColor(ContextCompat.getColor(requireActivity(), R.color.grey))
-
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
-        searchView.queryHint = resources.getString(R.string.cari)
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null) {
-                    hideContent()
-                    viewModel.searchUser(query).observe(viewLifecycleOwner, observer)
-                }
-                searchView.clearFocus()
-                return true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+        when (item.itemId) {
+            R.id.search -> {
+                searchUser()
+                true
             }
+            else -> super.onOptionsItemSelected(item)
+        }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText != null && newText.isNotEmpty()) {
-                    viewModel.searchUser(newText).observe(viewLifecycleOwner, observer)
-                }
-                return true
-            }
-        })
+    private fun searchUser() {
+        val toOnSearch = DashboardFragmentDirections.actionDashboardToOnSearchFragment()
+        safeNavigate(toOnSearch, javaClass.name)
     }
 
     override fun onDestroyView() {

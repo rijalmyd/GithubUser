@@ -12,5 +12,6 @@ data class DetailRepoEntity(
     val subscribersCount: Int?,
     val id: Int?,
     val watchersCount: Int?,
-    val forksCount: Int?
+    val forksCount: Int?,
+    val updatedAt: String
 )

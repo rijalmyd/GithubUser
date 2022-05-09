@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.rijaldev.githubuser.R
 import com.rijaldev.githubuser.data.local.entity.DetailUserEntity
@@ -21,6 +22,7 @@ import com.rijaldev.githubuser.databinding.LayoutBottomsheetBinding
 import com.rijaldev.githubuser.utils.CountFormatUtil.toCountFormat
 import com.rijaldev.githubuser.utils.ImageLoader.loadImage
 import com.rijaldev.githubuser.utils.SnackBarExt.showSnackBar
+import com.rijaldev.githubuser.utils.TabSelector.selectTabOn
 import com.rijaldev.githubuser.utils.TextLoader.loadData
 import com.rijaldev.githubuser.utils.ViewVisibilityUtil.setGone
 import com.rijaldev.githubuser.utils.ViewVisibilityUtil.setInvisible
@@ -39,6 +41,7 @@ class DetailFragment : Fragment() {
     private var username: String? = null
     private var dataUser: DetailUserEntity? = null
     private var stateFavoriteUser: Boolean = false
+    private lateinit var tabs: TabLayout
     private var menu: Menu? = null
 
     override fun onCreateView(
@@ -64,7 +67,7 @@ class DetailFragment : Fragment() {
             val dataUser = DetailFragmentArgs.fromBundle(arguments as Bundle).username
             if (dataUser != null) viewModel.setUsername(dataUser)
             username = dataUser
-            val tabs = tabs
+            this@DetailFragment.tabs = tabs
             val viewPager = viewPager
             val sectionPagerAdapter = SectionPagerAdapter(childFragmentManager, lifecycle, dataUser)
             viewPager.adapter = sectionPagerAdapter
@@ -114,7 +117,7 @@ class DetailFragment : Fragment() {
         binding?.header?.apply {
             with(detailEntity) {
                 ivUserProfile.loadImage(requireActivity(), avatarUrl, CircleCrop())
-                tvRepository.loadData(publicRepos?.toString())
+                tvRepository.loadData(publicRepos?.toCountFormat())
                 tvFollowers.loadData(followers?.toCountFormat())
                 tvFollowing.loadData(following?.toCountFormat())
                 tvName.loadData(name)
@@ -123,6 +126,9 @@ class DetailFragment : Fragment() {
                 tvCompany.loadData(company)
                 tvBio.loadData(bio?.trim())
                 tvUrl.loadData(blog)
+                repositoryContainer.selectTabOn(0, tabs)
+                followersContainer.selectTabOn(1, tabs)
+                followingContainer.selectTabOn(2, tabs)
                 val verifiedLink = blog?.verify()
                 tvUrl.setOnClickListener {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(verifiedLink))

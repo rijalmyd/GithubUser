@@ -1,4 +1,4 @@
-package com.rijaldev.githubuser.ui.adapter
+package com.rijaldev.githubuser.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

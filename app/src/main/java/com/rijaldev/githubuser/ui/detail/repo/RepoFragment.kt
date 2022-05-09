@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.rijaldev.githubuser.data.local.entity.RepoEntity
 import com.rijaldev.githubuser.data.remote.response.Result
 import com.rijaldev.githubuser.databinding.FragmentRepoBinding
-import com.rijaldev.githubuser.ui.adapter.RepoAdapter
+import com.rijaldev.githubuser.ui.adapters.RepoAdapter
 import com.rijaldev.githubuser.ui.detail.DetailFragment
 import com.rijaldev.githubuser.ui.detail.DetailFragmentDirections
 import com.rijaldev.githubuser.ui.detail.DetailViewModel

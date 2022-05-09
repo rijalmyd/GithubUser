@@ -38,5 +38,8 @@ data class DetailRepoResponse(
 	val watchersCount: Int,
 
 	@field:SerializedName("forks_count")
-	val forksCount: Int
+	val forksCount: Int,
+
+	@field:SerializedName("updated_at")
+	val updatedAt: String
 )

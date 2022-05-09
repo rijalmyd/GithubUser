@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.rijaldev.githubuser.R
 import com.rijaldev.githubuser.data.local.entity.DetailUserEntity
 import com.rijaldev.githubuser.databinding.FragmentFavoriteBinding
-import com.rijaldev.githubuser.ui.adapter.FavoriteAdapter
+import com.rijaldev.githubuser.ui.adapters.FavoriteAdapter
 import com.rijaldev.githubuser.ui.main.MainViewModel
 import com.rijaldev.githubuser.utils.NavControllerHelper.safeNavigate
 import com.rijaldev.githubuser.utils.ViewVisibilityUtil.setGone
@@ -86,6 +86,7 @@ class FavoriteFragment : Fragment(), FavoriteAdapter.OnUserFavCallback, Toolbar.
             }
             else -> false
         }
+
     override fun onItemClicked(user: DetailUserEntity) {
         val toDetail = FavoriteFragmentDirections.actionFavoriteToDetailFragment()
         toDetail.username = user.login

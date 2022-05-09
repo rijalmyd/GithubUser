@@ -64,9 +64,9 @@
                 android:elevation="1dp"
                 android:layout_gravity="bottom"
                 android:background="?attr/colorOnPrimary"
-                app:tabTextColor="@color/grey"
-                app:tabSelectedTextColor="?attr/colorSecondaryVariant"
+                app:tabIconTint="@drawable/bg_icon_selector"
                 app:tabIndicatorColor="?attr/colorSecondaryVariant"/>
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -80,5 +80,6 @@
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
