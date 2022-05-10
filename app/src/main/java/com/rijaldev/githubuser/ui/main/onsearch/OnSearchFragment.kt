@@ -15,7 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rijaldev.githubuser.R
 import com.rijaldev.githubuser.data.local.entity.UserEntity
-import com.rijaldev.githubuser.data.remote.response.Result
+import com.rijaldev.githubuser.data.remote.Result
 import com.rijaldev.githubuser.databinding.FragmentOnSearchBinding
 import com.rijaldev.githubuser.ui.adapters.UserAdapter
 import com.rijaldev.githubuser.ui.main.MainViewModel

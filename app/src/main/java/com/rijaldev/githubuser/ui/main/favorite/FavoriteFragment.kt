@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rijaldev.githubuser.R
@@ -26,7 +26,7 @@ class FavoriteFragment : Fragment(), FavoriteAdapter.OnUserFavCallback, Toolbar.
 
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding
-    private val viewModel: MainViewModel by activityViewModels()
+    private val viewModel: MainViewModel by viewModels()
     private lateinit var favAdapter: FavoriteAdapter
     private var isDarkMode: Boolean = false
 

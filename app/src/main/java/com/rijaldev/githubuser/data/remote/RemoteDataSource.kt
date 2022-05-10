@@ -1,6 +1,6 @@
 package com.rijaldev.githubuser.data.remote
 
-import com.rijaldev.githubuser.data.remote.response.api.ApiService
+import com.rijaldev.githubuser.data.remote.api.ApiService
 import javax.inject.Inject
 import javax.inject.Singleton
 

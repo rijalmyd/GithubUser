@@ -18,7 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorOnPrimary"
             app:menu="@menu/fav_menu"
-            app:title="List Favorite"
+            app:title="Favorite"
             app:titleTextColor="?attr/colorSecondaryVariant"
             app:popupTheme="@style/Theme.GithubUser.PopUpOverlay"/>
     </com.google.android.material.appbar.AppBarLayout>

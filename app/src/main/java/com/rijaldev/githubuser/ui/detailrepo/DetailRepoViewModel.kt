@@ -1,13 +1,11 @@
 package com.rijaldev.githubuser.ui.detailrepo
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
-import com.rijaldev.githubuser.data.UserRepository
+import androidx.lifecycle.*
+import com.rijaldev.githubuser.data.repository.user.UserRepository
 import com.rijaldev.githubuser.data.local.entity.DetailRepoEntity
-import com.rijaldev.githubuser.data.remote.response.Result
+import com.rijaldev.githubuser.data.remote.Result
 import com.rijaldev.githubuser.utils.DoubleTrigger
+import com.rijaldev.githubuser.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -15,6 +13,8 @@ import javax.inject.Inject
 class DetailRepoViewModel @Inject constructor(private val userRepository: UserRepository): ViewModel() {
     private val username = MutableLiveData<String>()
     private val repositoryName = MutableLiveData<String>()
+    private val _isResultHasBeenHandled = MutableLiveData<Event<Boolean>>()
+    val isResultHasBeenHandled: LiveData<Event<Boolean>> get() = _isResultHasBeenHandled
 
     fun setData(username: String, repositoryName: String) {
         this.username.value = username
@@ -23,5 +23,9 @@ class DetailRepoViewModel @Inject constructor(private val userRepository: UserRe
 
     val getDetailRepository: LiveData<Result<DetailRepoEntity>> = Transformations.switchMap(DoubleTrigger(username, repositoryName)) {
         userRepository.getDetailRepo(it.first.toString(), it.second.toString())
+    }
+
+    fun setHasBeenHandled() {
+        _isResultHasBeenHandled.value = Event(true)
     }
 }

@@ -34,14 +34,14 @@ class MyTabLayout: TabLayout {
         indicator = ContextCompat.getDrawable(context, R.drawable.ic_indicator_tab)
     }
 
-    private fun Drawable?.setIconAt(position: Int) = getTabAt(position)?.apply { icon = this@setIconAt }
+    private fun Drawable?.setIconAtTab(position: Int) = getTabAt(position)?.apply { icon = this@setIconAtTab }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         setSelectedTabIndicator(indicator)
         tabRippleColor = null
-        firstTab.setIconAt(0)
-        secondTab.setIconAt(1)
-        thirdTab.setIconAt(2)
+        firstTab.setIconAtTab(0)
+        secondTab.setIconAtTab(1)
+        thirdTab.setIconAtTab(2)
     }
 }

@@ -1,6 +1,6 @@
 package com.rijaldev.githubuser.di
 
-import com.rijaldev.githubuser.data.remote.response.api.ApiService
+import com.rijaldev.githubuser.data.remote.api.ApiService
 import com.rijaldev.githubuser.utils.Constant
 import dagger.Module
 import dagger.Provides

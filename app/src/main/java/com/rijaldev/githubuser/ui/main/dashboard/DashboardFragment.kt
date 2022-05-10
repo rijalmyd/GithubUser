@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rijaldev.githubuser.R
 import com.rijaldev.githubuser.data.local.entity.UserEntity
-import com.rijaldev.githubuser.data.remote.response.Result
+import com.rijaldev.githubuser.data.remote.Result
 import com.rijaldev.githubuser.databinding.FragmentDashboardBinding
 import com.rijaldev.githubuser.ui.adapters.UserAdapter
 import com.rijaldev.githubuser.ui.main.MainViewModel
@@ -95,14 +95,14 @@ class DashboardFragment: Fragment(), UserAdapter.UserClickCallback {
             else -> super.onOptionsItemSelected(item)
         }
 
-    private fun searchUser() {
-        val toOnSearch = DashboardFragmentDirections.actionDashboardToOnSearchFragment()
-        safeNavigate(toOnSearch, javaClass.name)
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun searchUser() {
+        val toOnSearch = DashboardFragmentDirections.actionDashboardToOnSearchFragment()
+        safeNavigate(toOnSearch, javaClass.name)
     }
 
     override fun onItemClicked(user: UserEntity) {

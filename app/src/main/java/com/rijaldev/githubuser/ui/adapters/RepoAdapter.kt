@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.rijaldev.githubuser.R
 import com.rijaldev.githubuser.data.local.entity.RepoEntity
 import com.rijaldev.githubuser.databinding.ItemRepoBinding
 import com.rijaldev.githubuser.utils.CountFormatUtil.toCountFormat
@@ -33,7 +32,7 @@ class RepoAdapter(private val callback: OnRepoCallback
                 tvTitle.loadData(repo.name)
                 tvVisibility.loadData(repo.visibility?.replaceFirstChar { it.uppercase() })
                 tvDescription.loadData(repo.description ?: "-")
-                tvLanguage.loadData(repo.language ?: itemView.context.getString(R.string.text_unknown))
+                tvLanguage.loadData(repo.language ?: "-")
                 tvStars.loadData(repo.stargazersCount?.toCountFormat())
                 tvUpdatedAt.loadData(repo.updatedAt?.getTimeAgo())
                 itemView.setOnClickListener { callback.onItemClicked(repo) }

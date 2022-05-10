@@ -1,4 +1,4 @@
-package com.rijaldev.githubuser.data.remote.response.api
+package com.rijaldev.githubuser.data.remote.api
 
 import com.rijaldev.githubuser.data.remote.response.detail.DetailUserResponse
 import com.rijaldev.githubuser.data.remote.response.detailrepo.DetailRepoResponse

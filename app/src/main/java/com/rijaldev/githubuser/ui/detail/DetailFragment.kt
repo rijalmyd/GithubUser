@@ -16,7 +16,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.rijaldev.githubuser.R
 import com.rijaldev.githubuser.data.local.entity.DetailUserEntity
-import com.rijaldev.githubuser.data.remote.response.Result
+import com.rijaldev.githubuser.data.remote.Result
 import com.rijaldev.githubuser.databinding.FragmentDetailBinding
 import com.rijaldev.githubuser.databinding.LayoutBottomsheetBinding
 import com.rijaldev.githubuser.utils.CountFormatUtil.toCountFormat

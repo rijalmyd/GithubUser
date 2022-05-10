@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rijaldev.githubuser.data.local.entity.UserEntity
-import com.rijaldev.githubuser.data.remote.response.Result
+import com.rijaldev.githubuser.data.remote.Result
 import com.rijaldev.githubuser.databinding.FragmentFollowBinding
 import com.rijaldev.githubuser.ui.adapters.UserAdapter
 import com.rijaldev.githubuser.ui.detail.DetailFragment

@@ -12,13 +12,12 @@ object LanguageColorUtil {
         val colorFilter: LightingColorFilter =
             when (language) {
                 "Python" -> LightingColorFilter(Color.GREEN, Color.LTGRAY)
-                "CSS", "C++", "Java" -> LightingColorFilter(Color.RED, Color.LTGRAY)
-                "C", "PHP", "Dart", "Kotlin" -> LightingColorFilter(Color.BLUE, Color.LTGRAY)
+                "CSS", "C++", "Java", "Ruby" -> LightingColorFilter(Color.RED, Color.LTGRAY)
+                "C", "PHP", "Kotlin" -> LightingColorFilter(Color.BLUE, Color.LTGRAY)
                 "Erlang" -> LightingColorFilter(Color.LTGRAY, Color.CYAN)
-                "Go" -> LightingColorFilter(Color.WHITE, Color.LTGRAY)
                 "HTML", "Swift" -> LightingColorFilter(Color.LTGRAY, Color.CYAN)
                 "Shell" -> LightingColorFilter(Color.BLACK, Color.LTGRAY)
-                "Ruby" -> LightingColorFilter(Color.CYAN, Color.LTGRAY)
+                "Dart", "Go" -> LightingColorFilter(Color.CYAN, Color.LTGRAY)
                 "TypeScript" -> LightingColorFilter(Color.MAGENTA, Color.LTGRAY)
                 "JavaScript" -> LightingColorFilter(Color.YELLOW, Color.LTGRAY)
                 else -> LightingColorFilter(Color.DKGRAY, Color.DKGRAY)

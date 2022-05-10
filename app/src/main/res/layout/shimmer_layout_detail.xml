@@ -118,7 +118,7 @@
         android:drawablePadding="4dp"
         android:gravity="center_vertical"
         android:visibility="invisible"
-        app:drawableStartCompat="@drawable/ic_baseline_location_on_24"
+        app:drawableStartCompat="@drawable/ic_location"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_bio"
         tools:text="Palembang"/>
@@ -132,7 +132,7 @@
         android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@id/tv_location"
         app:layout_constraintStart_toStartOf="parent"
-        app:drawableStartCompat="@drawable/ic_baseline_company_24"
+        app:drawableStartCompat="@drawable/ic_organization"
         tools:text="Dicoding"/>
 
     <androidx.constraintlayout.widget.Guideline

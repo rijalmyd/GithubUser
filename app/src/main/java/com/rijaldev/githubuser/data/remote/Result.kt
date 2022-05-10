@@ -1,4 +1,4 @@
-package com.rijaldev.githubuser.data.remote.response
+package com.rijaldev.githubuser.data.remote
 
 sealed class Result<out R> {
     data class Success<out T>(val data: T?): Result<T>()

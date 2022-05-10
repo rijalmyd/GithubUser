@@ -1,11 +1,14 @@
 package com.rijaldev.githubuser.di
 
-import com.rijaldev.githubuser.data.UserRepository
+import com.rijaldev.githubuser.data.repository.user.UserRepository
+import com.rijaldev.githubuser.data.repository.user.UserRepositoryImpl
 import com.rijaldev.githubuser.data.local.LocalDataSource
 import com.rijaldev.githubuser.data.local.datastore.SettingPreference
 import com.rijaldev.githubuser.data.local.room.UserDatabase
 import com.rijaldev.githubuser.data.remote.RemoteDataSource
-import com.rijaldev.githubuser.data.remote.response.api.ApiService
+import com.rijaldev.githubuser.data.remote.api.ApiService
+import com.rijaldev.githubuser.data.repository.theme.ThemeRepository
+import com.rijaldev.githubuser.data.repository.theme.ThemeRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,8 +20,13 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     @Singleton
-    fun provideRepository(remoteDataSource: RemoteDataSource, localDataSource: LocalDataSource): UserRepository =
-        UserRepository(remoteDataSource, localDataSource)
+    fun provideUserRepository(remoteDataSource: RemoteDataSource, localDataSource: LocalDataSource): UserRepository =
+        UserRepositoryImpl(remoteDataSource, localDataSource)
+
+    @Provides
+    @Singleton
+    fun provideThemeRepository(localDataSource: LocalDataSource): ThemeRepository =
+        ThemeRepositoryImpl(localDataSource)
 
     @Provides
     @Singleton

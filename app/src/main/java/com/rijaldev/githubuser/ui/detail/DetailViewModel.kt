@@ -1,7 +1,7 @@
 package com.rijaldev.githubuser.ui.detail
 
 import androidx.lifecycle.*
-import com.rijaldev.githubuser.data.UserRepository
+import com.rijaldev.githubuser.data.repository.user.UserRepository
 import com.rijaldev.githubuser.data.local.entity.DetailUserEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

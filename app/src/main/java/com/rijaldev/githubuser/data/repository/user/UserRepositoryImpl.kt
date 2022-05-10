@@ -1,8 +1,6 @@
-package com.rijaldev.githubuser.data
+package com.rijaldev.githubuser.data.repository.user
 
-import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import com.rijaldev.githubuser.data.local.LocalDataSource
@@ -11,13 +9,13 @@ import com.rijaldev.githubuser.data.local.entity.DetailUserEntity
 import com.rijaldev.githubuser.data.local.entity.RepoEntity
 import com.rijaldev.githubuser.data.local.entity.UserEntity
 import com.rijaldev.githubuser.data.remote.RemoteDataSource
-import com.rijaldev.githubuser.data.remote.response.Result
+import com.rijaldev.githubuser.data.remote.Result
 import javax.inject.Inject
 
-class UserRepository @Inject constructor(
+class UserRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource
-): UserDataSource {
+): UserRepository {
 
     override fun getUsers(): LiveData<Result<List<UserEntity>>> =
         liveData {
@@ -145,7 +143,8 @@ class UserRepository @Inject constructor(
             }
         }
 
-    override fun getDetailRepo(username: String, repository: String
+    override fun getDetailRepo(
+        username: String, repository: String
     ): LiveData<Result<DetailRepoEntity>> = liveData {
         try {
             val response = remoteDataSource.getDetailRepo(username, repository)
@@ -163,7 +162,8 @@ class UserRepository @Inject constructor(
                     id,
                     watchersCount,
                     forksCount,
-                    updatedAt
+                    updatedAt,
+                    topics
                 )
                 emit(Result.Success(detailEntity))
             }
@@ -183,10 +183,4 @@ class UserRepository @Inject constructor(
 
     override suspend fun removeFromFavorite(id: Int) =
         localDataSource.removeFromFavorite(id)
-
-    override fun isDarkModeActive(): LiveData<Boolean> =
-        localDataSource.isDarkModeActive().asLiveData()
-
-    override suspend fun setThemeMode(isDarkMode: Boolean): Preferences =
-        localDataSource.setThemeMode(isDarkMode)
 }

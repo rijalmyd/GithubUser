@@ -13,8 +13,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.rijaldev.githubuser.R
 import com.rijaldev.githubuser.data.local.entity.DetailRepoEntity
-import com.rijaldev.githubuser.data.remote.response.Result
+import com.rijaldev.githubuser.data.remote.Result
 import com.rijaldev.githubuser.databinding.FragmentDetailRepoBinding
+import com.rijaldev.githubuser.utils.ChipLoader.addChip
 import com.rijaldev.githubuser.utils.CountFormatUtil.toCountFormat
 import com.rijaldev.githubuser.utils.DateFormatUtil.getTimeAgo
 import com.rijaldev.githubuser.utils.LanguageColorUtil.setLeftDrawableColor
@@ -55,24 +56,32 @@ class DetailRepoFragment : Fragment() {
         val repoName = DetailRepoFragmentArgs.fromBundle(arguments as Bundle).repositoryName
         if (username != null && repoName != null) {
             viewModel.setData(username, repoName)
+            viewModel.setHasBeenHandled()
         }
         binding?.contentRepo?.root?.setInvisible()
         viewModel.getDetailRepository.observe(requireActivity(), observer)
     }
 
     private val observer = Observer<Result<DetailRepoEntity>> { result ->
-        when (result) {
-            is Result.Success -> {
-                showContent()
-                result.data?.let {
-                    populateUser(it)
+        viewModel.isResultHasBeenHandled.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { resultHasNotBeenHandled ->
+                if (resultHasNotBeenHandled) {
+                    when (result) {
+                        is Result.Success -> {
+                            showContent()
+                            result.data?.let { detailResult ->
+                                populateUser(detailResult)
+                            }
+                        }
+                        is Result.Error -> {
+                            showContent()
+                            requireActivity().showSnackBar(
+                                requireActivity().window.decorView.rootView,
+                                result.message
+                            )
+                        }
+                    }
                 }
-            }
-            is Result.Error -> {
-                showContent()
-                requireActivity().showSnackBar(
-                    requireActivity().window.decorView.rootView,
-                    result.message)
             }
         }
     }
@@ -96,6 +105,7 @@ class DetailRepoFragment : Fragment() {
                 tvNetworkCount.loadData(networkCount?.toCountFormat())
                 tvDescription.text = description ?: "No description provided."
                 tvLanguage.setLeftDrawableColor(requireActivity(), language)
+                topics?.forEach { cgTopics.addChip(requireActivity(), it) }
                 repoUrl.setOnClickListener {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(htmlUrl))
                     startActivity(intent)
